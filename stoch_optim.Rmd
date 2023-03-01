@@ -2,7 +2,7 @@
 title: "StochOptim R Tests"
 author: "Arqam Patel"
 date: "2023-02-27"
-output: pdf_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -100,7 +100,7 @@ optim() does not allow passing multiple methods as arguments at once, thus we ha
 
 ## Other local optimisers
 
-We use the ucminf optimiser to find minima starting from the exact same points as the previous implementation using optim(). 
+We use the ucminf optimiser to find minima starting from the exact same points as the previous implementation did using optim(). 
 
 ```{r echo = F}
 library(ucminf)
@@ -126,7 +126,7 @@ df2
 
 ```
 
-Alternatively, we can use optimx() to run multiple optimisers using a much smaller number of lines of code and compare them.
+We can use optimx() to run multiple optimisers (as in optim()), but using a much smaller number of lines of code and compare them.
 
 ```{r echo = F}
 library(optimx)
