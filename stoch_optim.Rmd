@@ -253,7 +253,7 @@ df5
 In the case of GenSA, the estimated optimum proposed by the default function arguments are quite good, producing a function value that underflows as 0. 
 
 It is also quite slow. The package authors note:
-"The default values of the control components are set for a complex optimization problem. For usual optimization problem with medium complexity, GenSA can find a reasonable solution quickly sot he user is recommended to let GenSA stop earlier by setting threshold.stop."
+"The default values of the control components are set for a complex optimization problem. For usual optimization problem with medium complexity, GenSA can find a reasonable solution quickly so the user is recommended to let GenSA stop earlier by setting threshold.stop."
 
 Evaluating the estimates in terms of the distance from the origin, increasing the maxit does seem to improve the estimates. However, in case of temperature, no consistent (monotonous) pattern is visible. According to the GenSA package documentation however: "For very complex optimization problems, the user is recommended to increase maxit and temp." It is possible that the low dimensionality of the space we're considering for our Rastrigin function makes it relatively simple and thus tweaking the temperature does not yield much benefit.
 
@@ -363,4 +363,4 @@ persp(x, y, z, theta = 30, phi = 30, expand = 0.5, main = "ST function 3D plot",
 [^1] [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html)
 
 [^2] [Continuous Global Optimization in R](https://www.jstatsoft.org/article/view/v060i06)
-[]()
+

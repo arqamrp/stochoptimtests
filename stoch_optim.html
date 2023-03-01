@@ -403,7 +403,7 @@ replications:</p>
 <pre><code>##                        p1           p2    value  time
 ## initial     -2.401191e+00 4.079510e+00 41.76422 0.000
 ## Nelder-Mead -1.989900e+00 3.979759e+00 19.89908 0.001
-## BFGS        -2.984856e+00 2.984854e+00 17.90920 0.001
+## BFGS        -2.984856e+00 2.984854e+00 17.90920 0.002
 ## CG          -3.441730e-09 8.088158e-10  0.00000 0.003
 ## L-BFGS-B    -1.989912e+00 3.979784e+00 19.89907 0.001
 ## SANN        -1.987232e+00 1.991254e+00  7.96144 0.134</code></pre>
@@ -434,13 +434,13 @@ ones we reached using optim.</p>
 <p>We can use optimx() to run different optimisation methods using a
 much smaller number of lines of code. We can compare them:</p>
 <pre><code>##                        p1           p2     value xtime
-## Nelder-Mead -1.989900e+00 3.979759e+00 19.899075 0.000
+## Nelder-Mead -1.989900e+00 3.979759e+00 19.899075 0.001
 ## BFGS        -2.984856e+00 2.984854e+00 17.909202 0.000
 ## CG          -3.441730e-09 8.088158e-10  0.000000 0.000
 ## L-BFGS-B    -1.989912e+00 3.979784e+00 19.899075 0.000
 ## ucminf      -1.989913e+00 3.979782e+00 19.899075 0.000
 ## nlm          9.949581e-01 9.949581e-01  1.989918 0.000
-## nlminb      -1.989912e+00 3.979784e+00 19.899075 0.001</code></pre>
+## nlminb      -1.989912e+00 3.979784e+00 19.899075 0.000</code></pre>
 <p>While four of the methods converge to the same local minimum, two
 other methods approach a better local minimum, and the CG method
 approaches the global minimum. All methods take a negligible amount of
@@ -458,8 +458,8 @@ Optimisation.</p>
 replications (using default function arguments).</p>
 <pre><code>##                    p1            p2       value  time
 ## DEoptim -1.357104e-06 -8.588545e-06 1.49994e-08 0.131
-## GenSA    2.843176e-10  1.177885e-10 0.00000e+00 0.973
-## psoptim  3.376046e-09 -6.880894e-10 0.00000e+00 1.798</code></pre>
+## GenSA    2.843176e-10  1.177885e-10 0.00000e+00 0.980
+## psoptim  3.376046e-09 -6.880894e-10 0.00000e+00 1.813</code></pre>
 <p>We can observe that DEoptim is the fastest optimiser under the
 respective default conditions, while psoptim and GenSA are slower but
 better.</p>
@@ -470,11 +470,11 @@ members) and itermax (maximum no. of iterations) may be useful to get
 better estimates of the global minimum. The default values of NP is 50
 and itermax is 250.</p>
 <pre><code>##                         p1            p2        value  time
-## default       6.402712e-06 -2.388698e-06 9.265030e-09 0.131
-## NP=75         3.107653e-07  8.397239e-08 2.055955e-11 0.443
-## NP=200        2.216914e-06 -1.503676e-06 1.423611e-09 1.127
-## itermax=375  -9.068795e-10  4.398613e-09 3.552714e-15 0.252
-## itermax=1000 -9.581122e-11  4.609981e-10 0.000000e+00 0.673</code></pre>
+## default       6.402712e-06 -2.388698e-06 9.265030e-09 0.132
+## NP=75         3.107653e-07  8.397239e-08 2.055955e-11 0.437
+## NP=200        2.216914e-06 -1.503676e-06 1.423611e-09 1.119
+## itermax=375  -9.068795e-10  4.398613e-09 3.552714e-15 0.250
+## itermax=1000 -9.581122e-11  4.609981e-10 0.000000e+00 0.666</code></pre>
 <p>We can see that the values we get by increasing either NP or itermax
 are closer to the origin than the previous ones. However, we see that
 the optimiser converges better and faster for a change in itermax
@@ -487,20 +487,20 @@ changes in itermax).</p>
 function argument that controls the probability of accepting worse
 solutions during the search process).</p>
 <pre><code>##                              p1            p2     value  time
-## default           -2.827916e-12  5.476625e-13 0.0000000 0.975
-## temperature = 1    1.391409e-14 -7.015557e-13 0.0000000 1.262
-## temperature = 10  -2.460481e-09  5.711768e-10 0.0000000 1.059
-## temperature = 100  8.868914e-12 -3.636632e-11 0.0000000 1.062
-## maxit = 100        1.918515e-10  9.949586e-01 0.9949591 0.012
-## maxit = 375       -1.061417e-12  2.191422e-12 0.0000000 0.041
-## maxit = 1000      -7.361776e-13  6.851085e-13 0.0000000 0.107</code></pre>
+## default           -2.827916e-12  5.476625e-13 0.0000000 0.979
+## temperature = 1    1.391409e-14 -7.015557e-13 0.0000000 1.263
+## temperature = 10  -2.460481e-09  5.711768e-10 0.0000000 1.067
+## temperature = 100  8.868914e-12 -3.636632e-11 0.0000000 1.071
+## maxit = 100        1.918515e-10  9.949586e-01 0.9949591 0.013
+## maxit = 375       -1.061417e-12  2.191422e-12 0.0000000 0.042
+## maxit = 1000      -7.361776e-13  6.851085e-13 0.0000000 0.108</code></pre>
 <p>In the case of GenSA, the estimated optimum proposed by the default
 function arguments are quite good, producing a function value that
 underflows as 0.</p>
 <p>It is also quite slow. The package authors note: “The default values
 of the control components are set for a complex optimization problem.
 For usual optimization problem with medium complexity, GenSA can find a
-reasonable solution quickly sot he user is recommended to let GenSA stop
+reasonable solution quickly so the user is recommended to let GenSA stop
 earlier by setting threshold.stop.”</p>
 <p>Evaluating the estimates in terms of the distance from the origin,
 increasing the maxit does seem to improve the estimates. However, in
@@ -518,12 +518,12 @@ for getting a better estimate. The swarm size s (default 12) is also a
 hyperparameter. We could also try using the non-default SPSO2011
 method.</p>
 <pre><code>##                        p1            p2        value  time
-## default      2.611627e-10  1.622116e-09 0.000000e+00 1.831
-## maxit = 100  1.156110e-05 -2.148004e-07 2.652605e-08 0.179
+## default      2.611627e-10  1.622116e-09 0.000000e+00 1.834
+## maxit = 100  1.156110e-05 -2.148004e-07 2.652605e-08 0.180
 ## maxit = 500 -2.022985e-09 -1.094271e-10 0.000000e+00 0.899
-## s = 3       -1.031261e-09  9.949586e-01 9.949591e-01 0.517
-## s = 6        8.316656e-10  4.021507e-10 0.000000e+00 0.952
-## SPSO2011     3.185646e-09 -9.572976e-11 0.000000e+00 7.033</code></pre>
+## s = 3       -1.031261e-09  9.949586e-01 9.949591e-01 0.526
+## s = 6        8.316656e-10  4.021507e-10 0.000000e+00 0.948
+## SPSO2011     3.185646e-09 -9.572976e-11 0.000000e+00 6.987</code></pre>
 <p>We can observe that maxit and s correlate positively with the
 estimate accuracy. The SPSO2011 method isn’t much better here but is
 significantly slower.</p>
@@ -553,7 +553,7 @@ by:</p>
 <p>[^1] <a href="https://cran.r-project.org/web/views/Optimization.html">CRAN Task
 View: Optimization and Mathematical Programming</a></p>
 <p>[^2] <a href="https://www.jstatsoft.org/article/view/v060i06">Continuous Global
-Optimization in R</a> <a href></a></p>
+Optimization in R</a></p>
 </div>
 
 
