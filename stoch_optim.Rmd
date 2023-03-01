@@ -7,14 +7,14 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = F)
-
+library(rbenchmark)
 ```
 
 ## Rastrigin Function
 
 Here, the Rastrigin function is implemented for n dimensions, with the default number of dimensions set to 2. Given an n-dimensional input vector $\mathbf{x} = (x_1, x_2, ..., x_n)$ , it outputs a scalar computed using the function:
 
-$f(\mathbf{x}) = 2A + \sum_{i=1}^n [x_i^2 - A \cos(2\pi x_i)]$ where $A = 10$ and $n =2$ by default
+$f(\mathbf{x}) = An + \sum_{i=1}^n [x_i^2 - A \cos(2\pi x_i)]$ where $A = 10$ and $n =2$ by default
 
 ```{r rastrigin}
 rastrigin <- function(X, A = 10, n= 2){
@@ -22,9 +22,11 @@ rastrigin <- function(X, A = 10, n= 2){
 }
 ```
 
-## 3D Plot of the Rastrigin function
+### 3D Plot of the Rastrigin function
 
 I use a perspective 3D plot to visualise the Rastrigin function in three dimensions, with different values on the x and y axes corresponding to $x_1$ and $x_2$ , and the z coordinate representing the function value $f(\mathbf{x})$ where $\mathbf{x} = (x_1, x_2)$
+
+The figure curves downward toward the centre, suggesting that the minimum might be (0,0). We can confirm this by observing that for all $i$, $A (1-\cos(2\pi x_i)) + x_i^2$ is non negative and $f(x)$ is the sum of these. $f((0,0)) = 0$ is the least non negative quantity possible and thus the origin is a global minimum.
 
 
 ```{r echo = FALSE}
@@ -44,7 +46,8 @@ persp(x, y, z, theta = 30, phi = 30, expand = 0.5, main = "Rastrigin function 3D
 
 ## Optimisation using optim()
 
-Starting at some random coordinates, we try to find a local minimum of the above Rastrigin function surface using the optim optimiser.
+### Different starting points
+Starting at some random coordinates, we try to find a local minimum of the above Rastrigin function surface using the optim optimiser, using the default "Nelder-Mead" method.
 
 
 ```{r echo =F}
@@ -67,13 +70,15 @@ for(i in 1:n){
 
 mat <- cbind(init, vals, opt)
 df <- as.data.frame(mat)
-colnames(df) <- c("x_init", "y_init", "z_init", "x_optim", "y_optim", "z_optim")
+colnames(df) <- c("p1_init", "p2_init", "value_init", "p1_optim", "p2_optim", "value_optim")
 df
 
 
 ```
 
-We then vary the method for the same starting point:
+### Different methods
+
+We then vary the method for the same starting point and compare the minima found, number of function calls needed and time taken for 10 replications:
 
 ```{r echo = F}
 p <- init[1,]
@@ -85,22 +90,26 @@ j <-2
 for(i in c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN"))
 {
   optimum <- optim(par = p, fn = rastrigin, method = i)
-  foo <- cbind(optimum$par[1], optimum$par[2], optimum$value, optimum$counts[1])
-  mat[j,] <- foo
+  foo <- cbind(optimum$par[1], optimum$par[2], optimum$value)
+  time <- benchmark(optim(par = p, fn = rastrigin, method = i), columns = "elapsed", replications =10)
+  
+  mat[j,1:3] <- foo
+  mat[j,4] <- time
   j <- j+1
 }
 
 rownames(mat) <- c("initial","Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN")
-colnames(mat) <- c("x", "y", "z", "f_evals") 
+colnames(mat) <- c("p1", "p2", "value", "time") 
 mat
 
 ```
 
+We can observe that the methods vary a lot in terms of the local optima they find, as well as the number of function calls needed.
 optim() does not allow passing multiple methods as arguments at once, thus we have to use a loop.
 
 ## Other local optimisers
-
-We use the ucminf optimiser to find minima starting from the exact same points as the previous implementation did using optim(). 
+### ucminf()
+We use the ucminf optimiser to find minima starting from the exact same points as the previous implementation did using optim(Nelder-Mead). 
 
 ```{r echo = F}
 library(ucminf)
@@ -117,16 +126,20 @@ for(i in 1:n){
   opt2[i, 1] <- optimum$par[1]
   opt2[i, 2] <- optimum$par[2]
   opt2[i, 3] <- optimum$value
+  
 }
 
 mat2 <- cbind(init, vals2, opt2)
 df2 <- as.data.frame(mat2)
-colnames(df2) <- c("x_init", "y_init", "z_init", "x_optim", "y_optim", "z_optim")
+colnames(df2) <- c("p1_init", "p2_init", "value_init", "p1_optim", "p2_optim", "value_optim")
 df2
 
 ```
 
-We can use optimx() to run multiple optimisers (as in optim()), but using a much smaller number of lines of code and compare them.
+In three of these five cases, we approacb different minima to the ones we reached using optim.
+
+### optimx()
+We can use optimx() to run different optimisation methods using a much smaller number of lines of code. We can compare them:
 
 ```{r echo = F}
 library(optimx)
@@ -134,39 +147,39 @@ library(optimx)
 
 ```{r echo =F}
 methods <- c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B","ucminf", "nlm", "nlminb")
-optimx(par = init[1,] , rastrigin, method = methods)[, c(-7,-8,-9)]
+optimx(par = init[1,] , rastrigin, method = methods)[, c(-4, -5,-6,-7,-8,-9)]
 
 ```
 
+While four of the methods converge to the same local minimum, two other methods approach a better local minimum, and the CG method approaches the global minimum. All methods take a negligible amount of time to converge.
 
+## Stochastic Optimisation
 
-## Global Optimisers
-
-DEoptim, 
+I use three different global optimisers: DEoptim, GenSA and psoptim, which are listed under different classes of methods in [^2]. The three are based on different algorithms: Differential Evolutionary optimisation, Generalized Simulated Annealing, and Particle Swarm Optimisation. 
 
 ```{r echo = FALSE, include= F}
 library(DEoptim)
 library(GenSA)
-library(rgenoud)
-library(rbenchmark)
+library(pso)
+
 ```
 
-Now, we use multiple optimisation techniques and compare them in terms of time taken for 10 replications.
+We compare them in terms of precision achieved and time taken for 10 replications (using default function arguments).
 
 ```{r include = F}
 
 replications = 10
-df3 <- as.data.frame(matrix(0, 3, 4), row.names = c("DEoptim", "GenSA", "genoud"))
+df3 <- as.data.frame(matrix(0, 3, 4), row.names = c("DEoptim", "GenSA", "psoptim"))
 
-df3[,4] <- benchmark(deoptim <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F)), gensa <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12)), rgenoud <- genoud(fn = rastrigin, nvars =2) , columns = "elapsed", replications = 10)
+df3[,4] <- benchmark(deoptim <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F)), gensa <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12)), pso <- psoptim(fn = rastrigin, lower = c(-5.12, -5.12), upper = c(5.12, 5.12), par = c(NA,NA)), columns = "elapsed", replications = replications)
 
 DEopt <- deoptim$optim
 
-colnames(df3) = c("par1", "par2", "value", "time")
+colnames(df3) = c("p1", "p2", "value", "time")
 
 df3[1,1:3] <- c(DEopt$bestmem[1], DEopt$bestmem[2], DEopt$bestval) 
 df3[2,1:3] <- c(gensa$par[1], gensa$par[2], gensa$value)
-df3[3,1:3] <- c(rgenoud$par[1], rgenoud$par[2], rgenoud$value)
+df3[3,1:3] <- c(pso$par[1], pso$par[2], pso$value)
 
 ```
 
@@ -174,12 +187,114 @@ df3[3,1:3] <- c(rgenoud$par[1], rgenoud$par[2], rgenoud$value)
 df3
 ```
 
+We can observe that DEoptim is the fastest optimiser under the respective default conditions, while psoptim and GenSA are slower but better.
+
+### DEoptim
+
+For DEoptim, tuning the function arguments NP (number of population members) and itermax (maximum no. of iterations) may be useful to get better estimates of the global minimum. The default values of NP is 50 and itermax is 250.
+
+```{r echo =F}
+set.seed(1)
+replications = 10
+df4 <- as.data.frame(matrix(0, 5, 4), row.names = c("default", "NP=75", "NP=200","itermax=375", "itermax=1000"))
+
+df4[,4] <- benchmark(deoptim1 <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F))$optim,
+                     deoptim2 <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F, NP =75))$optim,
+                     deoptim3 <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F, NP =200))$optim,
+                     deoptim4 <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F, itermax = 375))$optim,
+                     deoptim5 <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F, itermax = 1000))$optim,
+                     columns = "elapsed", replications = replications)
+
+
+
+colnames(df4) = c("p1", "p2", "value", "time")
+
+df4[1,1:3] <- c(deoptim1$bestmem[1], deoptim1$bestmem[2], deoptim1$bestval) 
+df4[2,1:3] <- c(deoptim2$bestmem[1], deoptim2$bestmem[2], deoptim2$bestval) 
+df4[3,1:3] <- c(deoptim3$bestmem[1], deoptim3$bestmem[2], deoptim3$bestval) 
+df4[4,1:3] <- c(deoptim4$bestmem[1], deoptim4$bestmem[2], deoptim4$bestval)
+df4[5,1:3] <- c(deoptim5$bestmem[1], deoptim5$bestmem[2], deoptim5$bestval)
+df4
+```
+
+We can see that the values we get by increasing either NP or itermax are closer to the origin than the previous ones. However, we see that the optimiser converges better and faster for a change in itermax compared to a proportionate change in NP (it is more sensitive to changes in itermax).
+
+### GenSA
+Here, we can tune maxit (maximum no. of iterations), temperature (a function argument that controls the probability of accepting worse solutions during the search process).
+
+```{r echo =F}
+set.seed(1)
+replications = 10
+df5 <- as.data.frame(matrix(0, 7, 4), row.names = c("default", "temperature = 1", "temperature = 10", "temperature = 100","maxit = 100", "maxit = 375", "maxit = 1000"))
+
+df5[,4] <- benchmark(siman1 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list()),
+                     siman2 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(temperature = 1)),
+                     siman3 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(temperature = 10)),
+                     siman4 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(temperature = 100)),
+                     siman5 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(maxit = 100)),
+                     siman6 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(maxit = 375)),
+                     siman7 <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(maxit = 1000)),
+                     columns = "elapsed", replications = replications)
+
+
+
+colnames(df5) = c("p1", "p2", "value", "time")
+
+df5[1,1:3] <- c(siman1$par[1], siman1$par[2], rastrigin(siman1$par)) 
+df5[2,1:3] <- c(siman2$par[1], siman2$par[2], rastrigin(siman2$par)) 
+df5[3,1:3] <- c(siman3$par[1], siman3$par[2], rastrigin(siman3$par)) 
+df5[4,1:3] <- c(siman4$par[1], siman4$par[2], rastrigin(siman4$par))
+df5[5,1:3] <- c(siman5$par[1], siman5$par[2], rastrigin(siman5$par))
+df5[6,1:3] <- c(siman6$par[1], siman6$par[2], rastrigin(siman6$par))
+df5[7,1:3] <- c(siman7$par[1], siman7$par[2], rastrigin(siman7$par))
+df5
+```
+
+In the case of GenSA, the estimated optimum proposed by the default function arguments are quite good, producing a function value that underflows as 0. 
+
+It is also quite slow. The package authors note:
+"The default values of the control components are set for a complex optimization problem. For usual optimization problem with medium complexity, GenSA can find a reasonable solution quickly sot he user is recommended to let GenSA stop earlier by setting threshold.stop."
+
+Evaluating the estimates in terms of the distance from the origin, increasing the maxit does seem to improve the estimates. However, in case of temperature, no consistent (monotonous) pattern is visible. According to the GenSA package documentation however: "For very complex optimization problems, the user is recommended to increase maxit and temp." It is possible that the low dimensionality of the space we're considering for our Rastrigin function makes it relatively simple and thus tweaking the temperature does not yield much benefit.
+
+### psoptim
+
+Similar to the previous two, maxit (default 1000) can be increased for getting a better estimate. The swarm size s (default 12) is also a hyperparameter. We could also try using the non-default SPSO2011 method.
+
+```{r echo =F}
+set.seed(2)
+replications = 10
+df6 <- as.data.frame(matrix(0, 6, 4), row.names = c("default", "maxit = 100", "maxit = 500", "s = 3", "s = 6", "SPSO2011"))
+
+df6[,4] <- benchmark(psopt1 <- psoptim(par = c(NA, NA), fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12)),
+                     psopt2 <- psoptim(par = c(NA, NA), fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(maxit = 100)),
+                     psopt3 <- psoptim(par = c(NA, NA), fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(maxit = 500)),
+                     psopt4 <- psoptim(par = c(NA, NA), fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(s = 3)),
+                     psopt5 <- psoptim(par = c(NA, NA), fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(s = 6)),
+                     psopt6 <- psoptim(par = c(NA, NA), fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = list(type = "SPSO2011")),
+                     columns = "elapsed", replications = replications)
+
+
+
+colnames(df6) = c("p1", "p2", "value", "time")
+
+df6[1,1:3] <- c(psopt1$par[1], psopt1$par[2], rastrigin(psopt1$par)) 
+df6[2,1:3] <- c(psopt2$par[1], psopt2$par[2], rastrigin(psopt2$par)) 
+df6[3,1:3] <- c(psopt3$par[1], psopt3$par[2], rastrigin(psopt3$par)) 
+df6[4,1:3] <- c(psopt4$par[1], psopt4$par[2], rastrigin(psopt4$par))
+df6[5,1:3] <- c(psopt5$par[1], psopt5$par[2], rastrigin(psopt5$par))
+df6[6,1:3] <- c(psopt6$par[1], psopt6$par[2], rastrigin(psopt6$par))
+df6
+```
+
+We can observe that maxit and s correlate positively with the estimate accuracy. The SPSO2011 method isn't much better here but is significantly slower.
+
 ## Other functions
 
 
 ### Rosenbrock function
 
-We implement the Rosenbrock function for n dimensions, and plot it for 2D inputs:
+We can implement the Rosenbrock function for n dimensions, and plot it for 2D inputs:
 
 $f(\mathbf{x}) = \sum_{i=1}^{n-1} [ 100(x_{i+1} - x_i^2)^2 + (1-x_i)^2 ]$ 
 
@@ -245,7 +360,7 @@ persp(x, y, z, theta = 30, phi = 30, expand = 0.5, main = "ST function 3D plot",
 ```
 
 ## References
-[CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html)
+[^1] [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html)
 
-[Continuous Global Optimization in R](https://www.jstatsoft.org/article/view/v060i06)
+[^2] [Continuous Global Optimization in R](https://www.jstatsoft.org/article/view/v060i06)
 []()
