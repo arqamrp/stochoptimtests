@@ -1,0 +1,251 @@
+---
+title: "StochOptim R Tests"
+author: "Arqam Patel"
+date: "2023-02-27"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F)
+
+```
+
+## Rastrigin Function
+
+Here, the Rastrigin function is implemented for n dimensions, with the default number of dimensions set to 2. Given an n-dimensional input vector $\mathbf{x} = (x_1, x_2, ..., x_n)$ , it outputs a scalar computed using the function:
+
+$f(\mathbf{x}) = 2A + \sum_{i=1}^n [x_i^2 - A \cos(2\pi x_i)]$ where $A = 10$ and $n =2$ by default
+
+```{r rastrigin}
+rastrigin <- function(X, A = 10, n= 2){
+  n*A + sum(X^2 - A*cos(2*pi*X))
+}
+```
+
+## 3D Plot of the Rastrigin function
+
+I use a perspective 3D plot to visualise the Rastrigin function in three dimensions, with different values on the x and y axes corresponding to $x_1$ and $x_2$ , and the z coordinate representing the function value $f(\mathbf{x})$ where $\mathbf{x} = (x_1, x_2)$
+
+
+```{r echo = FALSE}
+
+x <- seq(-5.12, 5.12, length.out = 100)
+y <- seq(-5.12, 5.12, length.out = 100)
+z <- matrix(0,100,100)
+
+for(i in 1:length(x)){
+  for(j in 1:length(y)){
+    z[i,j] = rastrigin(c(x[i],y[j]))
+  }
+}
+
+persp(x, y, z, theta = 30, phi = 30, expand = 0.5, main = "Rastrigin function 3D plot", cex.main =.8, col = "lightblue")
+```
+
+## Optimisation using optim()
+
+Starting at some random coordinates, we try to find a local minimum of the above Rastrigin function surface using the optim optimiser.
+
+
+```{r echo =F}
+
+n <- 5
+
+set.seed(1)
+init <- matrix(runif(n = 2*n, -5.12, 5.12), nrow = n, ncol = 2)
+
+vals <- numeric(n)
+opt <- matrix(0, n, 3)
+
+for(i in 1:n){
+  vals[i] <- rastrigin(init[i,])
+  optimum <- optim(par = init[i,], fn = rastrigin)
+  opt[i, 1] <- optimum$par[1]
+  opt[i, 2] <- optimum$par[2]
+  opt[i, 3] <- optimum$value
+}
+
+mat <- cbind(init, vals, opt)
+df <- as.data.frame(mat)
+colnames(df) <- c("x_init", "y_init", "z_init", "x_optim", "y_optim", "z_optim")
+df
+
+
+```
+
+We then vary the method for the same starting point:
+
+```{r echo = F}
+p <- init[1,]
+mat <- as.data.frame(matrix(0,6,4))
+mat[1,1:3] <- df[1,1:3]
+
+j <-2
+
+for(i in c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN"))
+{
+  optimum <- optim(par = p, fn = rastrigin, method = i)
+  foo <- cbind(optimum$par[1], optimum$par[2], optimum$value, optimum$counts[1])
+  mat[j,] <- foo
+  j <- j+1
+}
+
+rownames(mat) <- c("initial","Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN")
+colnames(mat) <- c("x", "y", "z", "f_evals") 
+mat
+
+```
+
+optim() does not allow passing multiple methods as arguments at once, thus we have to use a loop.
+
+## Other local optimisers
+
+We use the ucminf optimiser to find minima starting from the exact same points as the previous implementation using optim(). 
+
+```{r echo = F}
+library(ucminf)
+```
+
+```{r echo = F}
+
+vals2 <- numeric(n)
+opt2 <- matrix(0, n, 3)
+
+for(i in 1:n){
+  vals2[i] <- rastrigin(init[i,])
+  optimum <- ucminf(par = init[i,], fn = rastrigin)
+  opt2[i, 1] <- optimum$par[1]
+  opt2[i, 2] <- optimum$par[2]
+  opt2[i, 3] <- optimum$value
+}
+
+mat2 <- cbind(init, vals2, opt2)
+df2 <- as.data.frame(mat2)
+colnames(df2) <- c("x_init", "y_init", "z_init", "x_optim", "y_optim", "z_optim")
+df2
+
+```
+
+Alternatively, we can use optimx() to run multiple optimisers using a much smaller number of lines of code and compare them.
+
+```{r echo = F}
+library(optimx)
+```
+
+```{r echo =F}
+methods <- c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B","ucminf", "nlm", "nlminb")
+optimx(par = init[1,] , rastrigin, method = methods)[, c(-7,-8,-9)]
+
+```
+
+
+
+## Global Optimisers
+
+DEoptim, 
+
+```{r echo = FALSE, include= F}
+library(DEoptim)
+library(GenSA)
+library(rgenoud)
+library(rbenchmark)
+```
+
+Now, we use multiple optimisation techniques and compare them in terms of time taken for 10 replications.
+
+```{r include = F}
+
+replications = 10
+df3 <- as.data.frame(matrix(0, 3, 4), row.names = c("DEoptim", "GenSA", "genoud"))
+
+df3[,4] <- benchmark(deoptim <- DEoptim(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12), control = DEoptim.control(trace = F)), gensa <- GenSA(fn = rastrigin, lower = c(-5.12,-5.12), upper = c(5.12, 5.12)), rgenoud <- genoud(fn = rastrigin, nvars =2) , columns = "elapsed", replications = 10)
+
+DEopt <- deoptim$optim
+
+colnames(df3) = c("par1", "par2", "value", "time")
+
+df3[1,1:3] <- c(DEopt$bestmem[1], DEopt$bestmem[2], DEopt$bestval) 
+df3[2,1:3] <- c(gensa$par[1], gensa$par[2], gensa$value)
+df3[3,1:3] <- c(rgenoud$par[1], rgenoud$par[2], rgenoud$value)
+
+```
+
+```{r echo = F}
+df3
+```
+
+## Other functions
+
+
+### Rosenbrock function
+
+We implement the Rosenbrock function for n dimensions, and plot it for 2D inputs:
+
+$f(\mathbf{x}) = \sum_{i=1}^{n-1} [ 100(x_{i+1} - x_i^2)^2 + (1-x_i)^2 ]$ 
+
+
+```{r rosenbrock}
+rosenbrock <- function(X, n = 2,  a = 1, b = 100){
+  ans <- 0
+  for(i in 1:(n-1)){
+    ans <- ans + (a-X[i])^2 + b*(X[i+1] - X[i]^2)^2
+  }
+  return(ans)
+}
+
+
+```
+
+```{r echo=FALSE}
+
+x <- seq(-5.12, 5.12, length.out = 100)
+y <- seq(-5.12, 5.12, length.out = 100)
+z <- matrix(0,100,100)
+
+for(i in 1:length(x)){
+  for(j in 1:length(y)){
+    z[i,j] = rosenbrock(c(x[i],y[j]))
+  }
+}
+
+persp(x, y, z, theta = 30, phi = 30, expand = 0.5, main = "Rosenbrock function 3D plot", cex.main =.8, col = "lightblue")
+
+
+```
+
+### Styblinski–Tang function
+
+We now implement the Styblinski-Tang function in n dimensions, given by:
+
+$f(x) = \frac{1}{2} \sum_{i=1}^n (x_i^4 - 16 x_i^2 + 5x_i)$
+
+
+```{r tang}
+
+styb_tang <- function(X){
+  sum(X^4 - 16*X^2 + 5*X)/2
+}
+
+```
+
+```{r echo=FALSE}
+# visualisation
+
+x <- seq(-5, 5, length.out = 100)
+y <- seq(-5, 5, length.out = 100)
+z <- matrix(0,100,100)
+
+for(i in 1:length(x)){
+  for(j in 1:length(y)){
+    z[i,j] = styb_tang(c(x[i],y[j]))
+  }
+}
+
+persp(x, y, z, theta = 30, phi = 30, expand = 0.5, main = "ST function 3D plot", cex.main =.8, col = "lightblue")
+```
+
+## References
+[CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html)
+
+[Continuous Global Optimization in R](https://www.jstatsoft.org/article/view/v060i06)
+[]()
