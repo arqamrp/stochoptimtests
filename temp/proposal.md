@@ -83,9 +83,18 @@ I plan to push commits every two days.
 ## Test
 
 For the qualification test, I solved five tasks:
-- Rastrigin function: I implemented the Rastrigin function, a common test function for optimisation, for n-dimensional vectors, using the definition on its Wikipedia page. I then plotted it in three dimensions (for 2D vectors, with the z axis representing fuunction value). I also guessed its global minimum and provided the rationale behind my guess.
-- optim(): I used the default Nelder-Mead local optimiser on five randomly initialised starting points (setting a seed for reproducibility). Then, fixing the starting point, I used the five different algorithm options within optim() (using separate calls for each method) to compare those. 
+### [Rastrigin function](https://github.com/arqamrp/stochoptimtests/blob/main/tests/rastrigin.R):
+I implemented the Rastrigin function, a common test function for optimisation, for n-dimensional vectors, using the definition on its Wikipedia page. I then plotted it in three dimensions (for 2D vectors, with the z axis representing fuunction value). I also guessed its global minimum and provided the rationale behind my guess.
+
+![Rastrigin plot](https://github.com/arqamrp/stochoptimtests/blob/main/tests/rastrigin.png)
+
+### [optim()](https://github.com/arqamrp/stochoptimtests/blob/main/tests/optim.R): 
+
+I used the default Nelder-Mead local optimiser on five randomly initialised starting points (setting a seed for reproducibility). Then, fixing the starting point, I used the five different algorithm options within optim() (using separate calls for each method) to compare them on the basis of the minima found and time taken (measured using rbenchmark). 
 After this, I used the ucminf function to implement another local optimiser (not available in optim) on those five points, and then the optimx function to run and compare multiple methods with the same initial point using one function call.
+
+
+
 - Stochastic optimisation: 
 
 
