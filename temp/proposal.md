@@ -1,4 +1,4 @@
-** Project info
+## Project info
 
 Project title: StochOptim: 
 
@@ -6,7 +6,7 @@ Project short title (30 characters):
 
 URL of project idea page: [https://github.com/rstats-gsoc/gsoc2023/wiki/StochOptim-stochastic-optimization-in-R](https://github.com/rstats-gsoc/gsoc2023/wiki/StochOptim-stochastic-optimization-in-R)
 
-** Bio of Contributor 
+## Bio of Contributor 
 
 I am a sophomore undergraduate in Statistics and Data Science at the Indian Institute of Technology, Kanpur. I enjoy
 My introduction to R took place through the course, Data Science Lab I, taught by Dr Dootika Vats, an ex R project GSOC alumna (2015) herself. In the course, I learned the fundamentals of R, including things like benchmarking, Rshiny, Rmarkdown and Rcpp. 
