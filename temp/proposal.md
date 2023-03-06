@@ -95,10 +95,28 @@ After this, I used the ucminf function to implement another local optimiser (not
 
 
 
-- Stochastic optimisation: 
+### [Stochastic optimisation](https://github.com/arqamrp/stochoptimtests/blob/main/tests/stochastic_optimisation.R) 
+
+I used three different global optimisers: DEoptim, GenSA and psoptim, which are listed under different classes of methods in [^2]. The three are based on different algorithms: Differential Evolutionary optimisation, Generalized Simulated Annealing, and Particle Swarm Optimisation. 
+We compare them in terms of precision achieved and time taken for 10 replications (using default function arguments).
 
 
-Describe the qualification test that you have submitted to you project mentors.  If feasible, include code, details, output, and example of similar coding problems that you have solved.
 
 
-** Anything Else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
