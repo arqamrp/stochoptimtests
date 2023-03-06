@@ -13,7 +13,7 @@ My introduction to R took place through the course, Data Science Lab I, taught b
 I am also currently doing a course, Statistical Computing, which includes optimisation methods and am also somewhat familiar with the theoretical content of the project.
 
 
-** Contact Information 
+## Contact Information 
 
 Contributor name: Arqam Patel
 
@@ -28,7 +28,7 @@ arqamrp21@gmail.com
 Other communications channels: Skype/Google+, etc. : 
 
 
-** Contributor affiliation
+## Contributor affiliation
 
 Institution: Indian Institute of Technology, Kanpur
 
@@ -39,11 +39,11 @@ Stage of completion: 2nd year out of 4
 Contact to verify: Dr Dootika Vats, dootika@iitk.ac.in
 
 
-** Schedule Conflicts:
+## Schedule Conflicts:
 
 My college will resume classes from July 31.
 
-** Mentors
+## Mentors
 
 Evaluating mentor name and email: 
 
@@ -51,7 +51,7 @@ Co-mentor name(s) and email(s): (at least one co-mentor required, who has to be 
 
 Have you been in touch with the mentors? When and how? 
 
-** Coding Plan and Methods
+## Coding Plan and Methods
 
 Describe in detail your plan for completing the work.  What functions will be written, how and when will you do design, how will you verify the results of your coding?  The sub-section headings below are examples only.  Each project is different, please make your application appropriate to the work you propose.  
 
@@ -60,7 +60,7 @@ Describe perceived obstacles and challenges, and how you plan to overcome them.
 The best R GSoC applications tend to be 10+ pages printed.  Planning is a key part of a successful project, and demonstrates to the mentors that you are qualified and engaged.
 
 
-** Timeline
+## Timeline
 
 (consult GSOC schedule)
 
@@ -72,7 +72,7 @@ What is your contingency plan for things not going to schedule? We understand th
 
 If you have other time commitments that will interfere with GSoC, we highly recommend explaining how you will front-load the work before coding start or work extra early on to build a cushion!
 
-** Management of Coding Project
+## Management of Coding Project
 
 How do you propose to ensure code is submitted / tested?
 
@@ -80,9 +80,13 @@ How often do you plan to commit?  What changes in commit behavior would indicate
 
 I plan to push commits every two days.
 
-** Test
+## Test
 
 For the qualification test, I solved five tasks:
+- Rastrigin function: I implemented the Rastrigin function, a common test function for optimisation, for n-dimensional vectors, using the definition on its Wikipedia page. I then plotted it in three dimensions (for 2D vectors, with the z axis representing fuunction value). I also guessed its global minimum and provided the rationale behind my guess.
+- optim(): I used the default Nelder-Mead local optimiser on five randomly initialised starting points (setting a seed for reproducibility). Then, fixing the starting point, I used the five different algorithm options within optim() (using separate calls for each method) to compare those. 
+After this, I used the ucminf function to implement another local optimiser (not available in optim) on those five points, and then the optimx function to run and compare multiple methods with the same initial point using one function call.
+- Stochastic optimisation: 
 
 
 Describe the qualification test that you have submitted to you project mentors.  If feasible, include code, details, output, and example of similar coding problems that you have solved.
