@@ -12,8 +12,41 @@ In the optimx package, the optimr() function is structured as a self contained w
 We can instead choose to have one central wrapper that takes the user command and in turn sends it to optimiser specific subwrappers.
 
 
+### GenSA controls
+
+| Argument | StochOptim analogue | Description                        |
+| :------: | :-----------------: | :---------:                        |
+| maxit  | max.iter               | Maximum no. of iterations          |
+| threshold.stop | threshold.stop | Expected objective function value to be reached  |
+| verbose | verbose | whether printing of progress occurs at each iteration|
+| max.call | | |
+| max.time | | |
+
+
+
 ### DEoptim controls
 
-| Argument | StochOptim analogue | Description |
-| :------: | :-----------------: | :---------: |
-| itermax  | maxit               | maximum no. of iterations|
+| Argument | StochOptim analogue | Description                        |
+| :------: | :-----------------: | :---------:                        |
+| itermax  | max.iter               | Maximum no. of iterations          |
+| VTR | threshold.stop | Expected objective function value to be reached  |
+| NP  |  | number of population members |
+| initialpop | | an initial sample of starting points |
+| trace | verbose | whether printing of progress occurs at each iteration |
+
+### GenSA outputs
+
+|   Field  | StochOptim analogue | Description                        |
+| :------: | :-----------------: | :---------:                        |
+| value  | value               | function value at found optimum          |
+| par | par |   |
+| trace.mat |  | number of population members |
+| initialpop | | an initial sample of starting points |
+
+
+
+
+
+
+
+
