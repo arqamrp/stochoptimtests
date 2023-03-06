@@ -15,7 +15,7 @@ We can instead choose to have one central wrapper that takes the user command an
 ### GenSA controls
 
 | Argument | StochOptim analogue | Description                        |
-| :------: | :-----------------: | :---------:                        |
+| :------: | :-----------------: | :---------                       |
 | maxit  | max.iter               | Maximum no. of iterations          |
 | threshold.stop | threshold.stop | Expected objective function value to be reached  |
 | verbose | verbose | whether printing of progress occurs at each iteration|
@@ -27,7 +27,7 @@ We can instead choose to have one central wrapper that takes the user command an
 ### DEoptim controls
 
 | Argument | StochOptim analogue | Description                        |
-| :------: | :-----------------: | :---------:                        |
+| :------: | :-----------------: | :---------                    |
 | itermax  | max.iter               | Maximum no. of iterations          |
 | VTR | threshold.stop | Expected objective function value to be reached  |
 | NP  |  | number of population members |
@@ -37,7 +37,7 @@ We can instead choose to have one central wrapper that takes the user command an
 ### GenSA outputs
 
 |   Field  | StochOptim analogue | Description                        |
-| :------: | :-----------------: | :---------:                        |
+| :------: | :-----------------: | :---------                        |
 | value  | value               | function value at found optimum          |
 | par | par |   |
 | trace.mat |  | number of population members |
