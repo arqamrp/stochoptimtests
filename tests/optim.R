@@ -1,3 +1,4 @@
+library(Rbenchmark)
 # rastrigin function
 rastrigin <- function(X, A = 10, n= 2){
   n*A + sum(X^2 - A*cos(2*pi*X))
