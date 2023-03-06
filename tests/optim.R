@@ -77,6 +77,3 @@ library(optimx)
 methods <- c("Nelder-Mead", "BFGS", "CG", "L-BFGS-B","ucminf", "nlm", "nlminb")
 optimx(par = init[1,] , rastrigin, method = methods)[, c(-4, -5,-6,-7,-8,-9)]
 
-
-
-# usin
