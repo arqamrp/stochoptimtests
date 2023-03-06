@@ -41,17 +41,27 @@ Contact to verify: Dr Dootika Vats, dootika@iitk.ac.in
 
 ## Schedule Conflicts:
 
-My college will resume classes from July 31.
+Classes at my college will resume classes from July 31.
 
 ## Mentors
 
-Evaluating mentor name and email: 
+Evaluating mentor name and email: John C Nash, 
 
 Co-mentor name(s) and email(s): (at least one co-mentor required, who has to be from a different physical institution from the evaluating mentor)
 
 Have you been in touch with the mentors? When and how? 
 
 ## Coding Plan and Methods
+
+The package aims to provide two main sorts of functionality:
+- a way to call multiple optimisers using a single interface
+- a way to compare these optimisers in the given use-case
+
+To start, we would need a comprehensive list of the optimisers, their various arguments that can be tweaked, and the default configurations.
+
+
+
+
 
 Describe in detail your plan for completing the work.  What functions will be written, how and when will you do design, how will you verify the results of your coding?  The sub-section headings below are examples only.  Each project is different, please make your application appropriate to the work you propose.  
 
@@ -100,7 +110,7 @@ After this, I used the ucminf function to implement another local optimiser (not
 I used three different global optimisers: DEoptim, GenSA and psoptim, which are listed under different classes of methods in [^2]. The three are based on different algorithms: Differential Evolutionary optimisation, Generalized Simulated Annealing, and Particle Swarm Optimisation. 
 We compare them in terms of precision achieved and time taken for 10 replications (using default function arguments).
 
-
+### [Other test functions]()
 
 
 
