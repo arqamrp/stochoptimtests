@@ -23,7 +23,7 @@ Telephone(s): +91 7715863670
 
 Email(s): 
 arqamrp@gmail.com
-arqamrp21@gmail.com
+arqamrp21@iitk.ac.in
 
 Other communications channels: Skype/Google+, etc. : 
 
