@@ -4,7 +4,7 @@ The package aims to provide two main sorts of functionality:
 - a way to call multiple optimisers using a single interface
 - a way to compare these optimisers in the given use-case
 
-To start, we would need a comprehensive lists of the optimisers, their various arguments that can be tweaked, the default configurations for these arguments, and the outputs.
+To start, we would need a comprehensive lists of the optimisers, their arguments, the control parameters that can be tweaked, the default configurations for these paramters, and the forms of the outputs.
 
 
 I have attempted to make such lists for GenSA and DEoptim to start with:
