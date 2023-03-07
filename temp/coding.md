@@ -16,7 +16,7 @@ The documentation does not include default values for all the parameters, so the
 
 | Argument | Type  | Optimiser agnostic | Default| Description |
 | :------: | :-----: | :---------                 | :--- | :-- |
-| maxit  | Integer  | No | 5000 | | Maximum no. of iterations  |
+| maxit  | Integer  | No | 5000 | Maximum no. of iterations  |
 | threshold.stop | Numeric | Yes | NULL | Expected objective function value to be reached |
 | nb.stop.improvement | Integer |  No | 1e6|  The program will stop when there is no any improvement in nb.stop.improvement steps.|
 | smooth | Logical | Yes | TRUE | whether objective function is smooth, or differentiable almost everywhere in the region of par |  
