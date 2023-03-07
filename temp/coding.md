@@ -167,10 +167,10 @@ In the optimx package, the optimr() function is structured as a self contained w
 We can instead choose to have one central wrapper that takes the user command and in turn sends it to optimiser specific subwrappers.
 
 The central wrapper will:
-- Act as an interface between the user and the various subwrappers by carrying the problem and data to the subwrappers.
-- Set default configurations for the selected optimisers, in a way that the configurations across optimisers are roughly equivalent and suitable for the given problem.
-- Make standardised calls to the subwrappers
-- Collate and return the results from the various subwrappers
+- Act as an interface between the user and the various subwrappers by carrying the problem and data to the desired subwrapper.
+- Set default configurations for the selected optimiser, in a way that the configurations across optimisers are roughly equivalent and suitable for the given problem.
+- Make standardised calls to the subwrapper.
+- Collate and return the results from the subwrapper in a standard format.
 
 The subwrappers, in turn, will:
 - Receive the standardised call with the problem, data and configurations
@@ -178,8 +178,8 @@ The subwrappers, in turn, will:
 - Run the optimiser
 - Convert the results into a standard form and return them
 
-Apart from these two, we would also need a comparison wrapper to benchmark, which could be integrated as an option into the global wrapper e.g. (compare = TRUE).
 
+Then, we would need a comparison wrapper which would make calls to all the various optimisers through the centraal wrapper, collect relevant information ie the optimum parameters, optimum value, function calls, time taken, etc. and display those in an easy to read, tabulated form.
 
 
 
