@@ -43,7 +43,7 @@ The documentation does not include default values for all the parameters, so the
 ### DEoptim controls
 
 | Argument | Type  | Optimiser agnostic | Default| Description |
-| :------: | :-------: | :-------: | :----: | :--- |
+| :------ | :------- | :------- | :---- | :--- |
 | VTR | Numeric | Yes | -Inf | Expected objective function value to be reached  |
 | strategy | Numeric | No | 2 | defines the Differential Evolution strategy used in the optimization procedure |
 | bs | Logical | No | FALSE | F: standard trial vs. target selection T: best of parent and child selection |
