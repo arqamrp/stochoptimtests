@@ -15,29 +15,29 @@ The documentation does not include default values for all the parameters, so the
 ### GenSA controls
 
 | Argument | Type  | Optimiser agnostic | Default| Description |
-| :------: | :-----: | :---------                 | :--- | :-- |
+| :------ | :-----: | :---------                 | :--- | :-- |
 | maxit  | Integer  | No | 5000 | Maximum no. of iterations  |
 | threshold.stop | Numeric | Yes | NULL | Expected objective function value to be reached |
 | nb.stop.improvement | Integer |  No | 1e6|  The program will stop when there is no any improvement in nb.stop.improvement steps.|
-| smooth | Logical | Yes | TRUE | whether objective function is smooth, or differentiable almost everywhere in the region of par |  
+| smooth | Logical | Yes | TRUE | Whether objective function is smooth, or differentiable almost everywhere in the region of par |  
 | max.call | Integer | No | 1e7 | Maximum number of function calls made by algorithm | 
 | max.time | Numeric | No | NULL | Maximum time for which algorithm runs | 
-| temperature | Numeric | No | 5230 | controls probability of accepting worse solutions during the search process | 
+| temperature | Numeric | No | 5230 | Controls probability of accepting worse solutions during the search process | 
 | visiting_param | Numeric | No | 2.62 | Parameter for visiting distribution | 
 | acceptance.param | Numeric | No | -5.0 | Parameter for acceptance distribution | 
 | verbose | Logical | Yes | FALSE | Whether printing of progress should occur at each iteration| 
 | simple.function | Logical | Yes | FALSE | Whether objective function has only a few local minima. | 
 | trace.mat | Logical | Yes | TRUE | Whether trace matrix should be available in the returned value | 
-| seed | integer | Yes | -100377| Negative integer value that can be set to initialize the internal random generator | 
+| seed | Integer | Yes | -100377| Negative integer value that can be set to initialize the internal random generator | 
 
 ### GenSA outputs
 
 |   Field  | Type | Description                        |
 | :------: | :-----: | :---------                        |
-| value  | Numeric   | function value at found optimum          |
+| value  | Numeric   | Function value at found optimum          |
 | par | Numeric vector | Best set of parameters |
-| count | Numeric | No. of calls of obj function during optimisation |
-| trace.mat | Numeric matrix | history matrix |
+| count | Integer | No. of calls of obj function during optimisation |
+| trace.mat | Numeric matrix | History matrix |
 
 
 ### DEoptim controls
@@ -45,21 +45,42 @@ The documentation does not include default values for all the parameters, so the
 | Argument | Type  | Optimiser agnostic | Default| Description |
 | :------ | :------- | :------- | :---- | :--- |
 | VTR | Numeric | Yes | -Inf | Expected objective function value to be reached  |
-| strategy | Numeric | No | 2 | defines the Differential Evolution strategy used in the optimization procedure |
+| strategy | Numeric | No | 2 | Defines the Differential Evolution strategy used in the optimization procedure |
 | bs | Logical | No | FALSE | F: standard trial vs. target selection T: best of parent and child selection |
-| NP | Integer | No | NA | number of population members |
+| NP | Integer | No | NA | Number of population members |
 | itermax | Integer  | No | 200 | Maximum no. of iterations     |
 | CR | Numeric  \[0, 1] | No | 0.5 | Crossover probability |
-| F | Numeric \[0, 2] | No | 0.8 | differential weighting factor |
-| initialpop | Numeric matrix | No | NULL | an initial sample of starting points |
-| storepopfrom | Integer | No | itermax + 1 | from which generation should the following intermediate populations be stored in memory |
-| storepopfreq | Integer | No | 1 |  frequency with which populations are stored |
+| F | Numeric \[0, 2] | No | 0.8 | Differential weighting factor |
+| initialpop | Numeric matrix | No | NULL | An initial sample of starting points |
+| storepopfrom | Integer | No | itermax + 1 | From which generation should the following intermediate populations be stored in memory |
+| storepopfreq | Integer | No | 1 |  Frequency with which populations are stored |
 | p | Numeric (0, 1] | No | - | When strategy = 6, the top (100 * p)% best solutions are used in the mutation |
 | c | Numeric (0, 1] | No | - | Controls the speed of the crossover adaptation|
-| reltol | Numeric (0,1] | No | sqrt(.Machine$double.eps) ~ 1e-8 | relative convergence tolerance | 
+| reltol | Numeric (0,1] | No | sqrt(.Machine$double.eps) ~ 1e-8 | Relative convergence tolerance | 
 | steptol | Integer | No | itermax | No. of steps after which reltol is checked |
-| trace | Logical/Numeric | Yes | TRUE  | whether printing of progress occurs at each iteration (or every `trace` iterations) |
+| trace | Logical/Numeric | Yes | TRUE  | Whether printing of progress occurs at each iteration (or every `trace` iterations) |
 
+### DEoptim outputs
+
+The output of the function DEoptim is a member of the S3 class DEoptim. It is a list with the following elements (with the elements of those tabulated):
+
+optim:
+|   Field  | Type | Description                        |
+| :------: | :-----: | :---------                        |
+| bestval  | Numeric   | Function value at found optimum          |
+| bestmem | Numeric vector | Best set of parameters |
+| nfeval | Integer | No. of calls of obj function during optimisation |
+| iter | Integer | No. of procedure iterations |
+
+member:
+|   Field  | Type | Description                        |
+| :------: | :-----: | :---------                        |
+| lower | Numeric vector | Lower boundary |
+| upper | Numeric vector | Upper boundary |
+| bestvalit | Numeric | Best value of fn at each iteration |
+| bestmemit | Numeric | Best member at each iteration |
+| pop | matrix | population generated at the last iteration |
+| storepop | list | list containing the intermediate populations |
 
 In the optimx package, the optimr() function is structured as a self contained wrapper, which makes for a single function running for >1000 LOC and having multiple points of failure, which would make debugging tougher.
 We can instead choose to have one central wrapper that takes the user command and in turn sends it to optimiser specific subwrappers.
