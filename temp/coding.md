@@ -14,21 +14,21 @@ The documentation does not include default values for all the parameters, so the
 
 ### GenSA controls
 
-| Argument | Type | Description                    | Optimiser agnostic? | Default|
+| Argument | Type  | Optimiser agnostic? | Default| Description |
 | :------: | :-----: | :---------                 | :--- | :-- |
-| maxit  | Integer     | Maximum no. of iterations          | No | 5000 |
-| threshold.stop | Numeric | Expected objective function value to be reached  | Yes | NULL |
-| nb.stop.improvement | Integer | The program will stop when there is no any improvement in nb.stop.improvement steps.| No | 1e6| 
-| smooth | Logical | whether objective function is smooth, or differentiable almost everywhere in the region of par | Yes? | TRUE | 
-| max.call | Integer | Maximum number of function calls made by algorithm | No | 1e7 |
-| max.time | Numeric | Maximum time for which algorithm runs | No | NULL |
-| temperature | Numeric | controls probability of accepting worse solutions during the search process | No | 5230 | 
-| visiting_param | Numeric | Parameter for visiting distribution | No | 2.62 |
-| acceptance.param | Numeric | Parameter for acceptance distribution | No | -5.0 |
-| verbose | Logical | Whether printing of progress should occur at each iteration| Yes | FALSE |
-| simple.function | Logical | Whether objective function has only a few local minima. | Yes | FALSE |
-| trace.mat | Logical | Whether trace matrix should be available in the returned value | Yes | TRUE |
-| seed | integer | Negative integer value that can be set to initialize the internal random generator | Yes | - 100377|
+| maxit  | Integer  | No | 5000 | | Maximum no. of iterations  |
+| threshold.stop | Numeric | Yes | NULL | Expected objective function value to be reached |
+| nb.stop.improvement | Integer |  No | 1e6|  The program will stop when there is no any improvement in nb.stop.improvement steps.|
+| smooth | Logical | Yes | TRUE | whether objective function is smooth, or differentiable almost everywhere in the region of par |  
+| max.call | Integer | No | 1e7 | Maximum number of function calls made by algorithm | 
+| max.time | Numeric | No | NULL | Maximum time for which algorithm runs | 
+| temperature | Numeric | No | 5230 | controls probability of accepting worse solutions during the search process | 
+| visiting_param | Numeric | No | 2.62 | Parameter for visiting distribution | 
+| acceptance.param | Numeric | No | -5.0 | Parameter for acceptance distribution | 
+| verbose | Logical | Yes | FALSE | Whether printing of progress should occur at each iteration| 
+| simple.function | Logical | Yes | FALSE | Whether objective function has only a few local minima. | 
+| trace.mat | Logical | Yes | TRUE | Whether trace matrix should be available in the returned value | 
+| seed | integer | Yes | - 100377| Negative integer value that can be set to initialize the internal random generator | 
 
 ### GenSA outputs
 
