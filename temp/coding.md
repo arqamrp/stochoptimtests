@@ -58,7 +58,7 @@ The documentation does not include default values for all the parameters, so the
 | c | Numeric (0, 1] | No | - | Controls the speed of the crossover adaptation|
 | reltol | Numeric (0,1] | No | sqrt(.Machine$double.eps) ~ 1e-8 | relative convergence tolerance | 
 | steptol | Integer | No | itermax | No. of steps after which reltol is checked |
-| trace | Logical/Numeric | Yes | TRUE  | whether printing of progress occurs at each iteration (or every \code{trace} iterations) |
+| trace | Logical/Numeric | Yes | TRUE  | whether printing of progress occurs at each iteration (or every `trace` iterations) |
 
 
 In the optimx package, the optimr() function is structured as a self contained wrapper, which makes for a single function running for >1000 LOC and having multiple points of failure, which would make debugging tougher.
