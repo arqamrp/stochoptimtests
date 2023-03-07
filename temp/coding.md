@@ -11,11 +11,20 @@ I have attempted to make such lists for GenSA and DEoptim to start with:
 
 ## GenSA
 
-The documentation does not include default values for all the parameters, so they have been taken from the source code.
+### GenSA arguments
+
+| Argument | Type  | Default| Description | Optional |
+| :------ | :-----: | :---------                 | :--- | :---- |
+| par | Numeric vector | NULL | Initial values for the components to be optimized | Yes |
+| fn | Function | - | Function to be optimised | No |
+| lower | Numeric vector | - | Lower bounds for components | No |
+| upper | Numeric vector | - | Upper bounds for components | No |
+| control | List | - | List with controls | Yes |
 
 ### GenSA controls
+The documentation does not include default values for all the parameters, so they have been taken from the source code.
 
-| Argument | Type  | Optimiser agnostic | Default| Description |
+| Control | Type  | Optimiser agnostic | Default| Description |
 | :------ | :-----: | :---------                 | :--- | :-- |
 | maxit  | Integer  | No | 5000 | Maximum no. of iterations  |
 | threshold.stop | Numeric | Yes | NULL | Expected objective function value to be reached |
@@ -40,10 +49,21 @@ The documentation does not include default values for all the parameters, so the
 | count | Integer | No. of calls of obj function during optimisation |
 | trace.mat | Numeric matrix | History matrix |
 
+## DEoptim
+
+### DEoptim arguments
+
+| Argument | Type  | Default| Description | Optional |
+| :------ | :-----: | :---------                 | :--- | :--- |
+| fn | Function | - | Function to be optimised | No |
+| lower | Numeric vector | - | Lower bounds for components | No |
+| upper | Numeric vector | - | Upper bounds for components | No |
+| control | List | - | List (& member of S3 class DEoptim.control) with controls | Yes |
+| fnMap | Function | - | an optional function that will be run after each population is created, but before the population is passed to the objective function | Yes |
 
 ### DEoptim controls
 
-| Argument | Type  | Optimiser agnostic | Default| Description |
+| Control | Type  | Optimiser agnostic | Default| Description |
 | :------ | :------- | :------- | :---- | :--- |
 | VTR | Numeric | Yes | -Inf | Expected objective function value to be reached  |
 | strategy | Numeric | No | 2 | Defines the Differential Evolution strategy used in the optimization procedure |
