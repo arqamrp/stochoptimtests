@@ -50,7 +50,7 @@ The documentation does not include default values for all the parameters, so the
 | NP | Integer | No | NA | number of population members |
 | itermax | Integer  | No | 200 | Maximum no. of iterations     |
 | CR | Numeric  \[0, 1] | No | 0.5 | Crossover probability |
-| F | Numeric \[0, 2] | 0.8 | differential weighting factor |
+| F | Numeric \[0, 2] | No | 0.8 | differential weighting factor |
 | initialpop | Numeric matrix | No | NULL | an initial sample of starting points |
 | storepopfrom | Integer | No | itermax + 1 | from which generation should the following intermediate populations be stored in memory |
 | storepopfreq | Integer | No | 1 |  frequency with which populations are stored |
