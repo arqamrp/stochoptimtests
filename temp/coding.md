@@ -10,7 +10,7 @@ I have attempted to make such lists for DEoptim and GenSA:
 
 ### GenSA controls
 
-| Argument | Type | Description                        | Optimiser agnostic? | Default|
+| Argument | Type | Description                    | Optimiser agnostic? | Default|
 | :------: | :-----------------: | :---------                       | :--- | :-- |
 | maxit  | Integer     | Maximum no. of iterations          | No | 5000 |
 | threshold.stop | Numeric | Expected objective function value to be reached  | Yes | NULL |
