@@ -40,7 +40,9 @@ The documentation does not include default values for all the parameters, so the
 | trace.mat | Logical | Yes | TRUE | Whether trace matrix should be available in the returned value | 
 | seed | Integer | Yes | -100377| Negative integer value that can be set to initialize the internal random generator | 
 
-### GenSA outputs
+### GenSA output
+
+Returned as a list.
 
 |   Field  | Type | Description                        |
 | :------: | :-----: | :---------                        |
@@ -81,11 +83,11 @@ The documentation does not include default values for all the parameters, so the
 | steptol | Integer | No | itermax | No. of steps after which reltol is checked |
 | trace | Logical/Numeric | Yes | TRUE  | Whether printing of progress occurs at each iteration (or every `trace` iterations) |
 
-### DEoptim outputs
+### DEoptim output
 
 The output of the function DEoptim is a member of the S3 class DEoptim. It is a list with the following elements (with the elements of those tabulated):
 
-optim:
+**optim**:
 |   Field  | Type | Description                        |
 | :------: | :-----: | :---------                        |
 | bestval  | Numeric   | Function value at found optimum          |
@@ -93,7 +95,7 @@ optim:
 | nfeval | Integer | No. of calls of obj function during optimisation |
 | iter | Integer | No. of procedure iterations |
 
-member:
+**member**:
 |   Field  | Type | Description                        |
 | :------: | :-----: | :---------                        |
 | lower | Numeric vector | Lower boundary |
@@ -145,6 +147,18 @@ member:
 | trace.stats | Logical | ? | FALSE | If TRUE statistics at every reporting step are collected and returned |
 | fnscale | Numeric | No | 1 | An overall scaling to be applied to the value of fn and gr (if used) during optimization |
 
+### psoptim outputs
+
+Returned as a list.
+
+|   Field  | Type | Description                        |
+| :------: | :-----: | :---------                        |
+| value  | Numeric   | Function value at found optimum          |
+| par | Numeric vector | Best set of parameters |
+| counts | Numeric vector | A three-element vector containing the number of function evaluations, the number of iterations, and the number of restarts |
+| convergence | Integer | 	0: reached abstol; 1: maxf reached; 2: maxit reached; 3: max.restart reached; 4: max.stagnate reached |
+| message | Character | A descriptive message of the reason for termination |
+| stats | Numeric matrix | A list of statistics collected at every reporting step |
 
 
 ## Wrapper structure
