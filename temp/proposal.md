@@ -72,6 +72,18 @@ The best R GSoC applications tend to be 10+ pages printed.  Planning is a key pa
 
 ## Timeline
 
+**Community Bonding Period**
+| May 4-10 | Review the source code of the package [optimx](https://cran.r-project.org/web/packages/optimx/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
+| May 11-16 | Read about and practice object oriented programming in R (from the book Advanced Object-Oriented Programming in R). Learn about S3, S4, R6 classes and decide which approach would be best. |
+| May 17-28 | Select the solvers to initially include forom amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers.  |
+
+**Coding period**
+May 29-June 4: Develop a prototype that works with two of the methods.
+
+July 6-July 12: Build the functions into a package. Get a prototype package with 3 solvers that passes R CMD check.
+July 14-20: Build 
+
+Write examples 
 (consult GSOC schedule)
 
 Provide a detailed timeline of how you plan to spend your summer.  Don't leave testing and documentation for last, as that's almost a guarantee of a failed project. 
