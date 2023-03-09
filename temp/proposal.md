@@ -72,10 +72,17 @@ The best R GSoC applications tend to be 10+ pages printed.  Planning is a key pa
 
 ## Timeline
 
+**Monthly overview of timeline**
 
-**Weekly timeline**
+May: Review the precursor codebase. Decide on the structure by iterating through some basic prototypes and approaches.
+June: Build the central wrapper and various subwrappers
+July: Troubleshoot and make the package pass R CMD check. Get started with a prototype of the comparison wrapper
+August: Finish the comparison wrapper, make the whole package pass R CMD check.
+
+**Detailed timeline**
 | Time | Task(s)|
 | --- | :---|
+|  | Communuity bonding period|
 | May 4-10 | Review the source code of the package [optimx](https://cran.r-project.org/web/packages/optimx/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
 | May 11-15 | Read about and practice object oriented programming in R (from the book Advanced Object-Oriented Programming in R). Learn about S3, S4, R6 classes and decide which approach would be best. |
 | May 16-22 | Select possibly 15-20 solvers to initially include from amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers. 
@@ -85,12 +92,14 @@ The best R GSoC applications tend to be 10+ pages printed.  Planning is a key pa
 | June 19-25 | Add custom control parameters and global options for each solver. Document everything added in real time. Test after each addition.|
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
 | July 3-10 | Build the functions into a package. Get a prototype package with a central wrapper with all solvers, that passes R CMD check.|
-| July 17-23| Initiate comparison wrapper with class structure, starting with 3-4 solvers.|
+| | Midterm evaluation|
+| July 17-23| Initiate comparison wrapper with class structure. Start with 3-4 solver options.|
 | July 24-August 3| Add all remaining solvers to the comparison wrapper, in a similar manner to the central wrapper. Document everything added in real time. Test after each addition. Compare performance of comparison wrapper to simple benchmarking.|
 | August 4-13| Add examples and documentation. Debug and make sure the package passes R CMD check on all platforms. |
 | August 14-21| Buffer week for troubleshooting.|
+|| Final evaluation|
 
-Since the last 3 weeks
+Since I'll be attending classes in the last 3 weeks, from July 31, I plan to leave the minimum amount of work possible and leave a buffer for unexpected delays or obstacles in the end.
 
 Write examples 
 (consult GSOC schedule)
