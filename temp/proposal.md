@@ -80,7 +80,7 @@ July: Troubleshoot and make the package pass R CMD check. Get started with a pro
 August: Finish the comparison wrapper, make the whole package pass R CMD check.
 
 **Detailed timeline**
-| Time | Task(s)|
+| Duration | Task(s)|
 | --- | :---|
 |  | Communuity bonding period|
 | May 4-10 | Review the source code of the package [optimx](https://cran.r-project.org/web/packages/optimx/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
@@ -100,7 +100,7 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 | August 14-21| Buffer week for troubleshooting.|
 || Final evaluation|
 
-Since I'll be attending classes in the last 3 weeks, from July 31, I plan to leave the minimum amount of work possible and leave a buffer for unexpected delays or obstacles in the end.
+Since I'll be attending classes in the last 3 weeks, from July 31, I plan to leave the minimum amount of work possible for the end, and leave a buffer for unexpected delays or obstacles in the end.
 
 Write examples 
 (consult GSOC schedule)
