@@ -75,8 +75,11 @@ The best R GSoC applications tend to be 10+ pages printed.  Planning is a key pa
 **Monthly overview of timeline**
 
 May: Review the precursor codebase. Decide on the structure by iterating through some basic prototypes and approaches.
+
 June: Build the central wrapper and various subwrappers
+
 July: Troubleshoot and make the package pass R CMD check. Get started with a prototype of the comparison wrapper
+
 August: Finish the comparison wrapper, make the whole package pass R CMD check.
 
 **Detailed timeline**
