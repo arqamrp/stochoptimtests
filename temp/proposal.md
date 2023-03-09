@@ -60,9 +60,6 @@ The package aims to provide two main sorts of functionality:
 To start, we would need a comprehensive list of the optimisers, their various arguments that can be tweaked, and the default configurations.
 
 
-
-
-
 Describe in detail your plan for completing the work.  What functions will be written, how and when will you do design, how will you verify the results of your coding?  The sub-section headings below are examples only.  Each project is different, please make your application appropriate to the work you propose.  
 
 Describe perceived obstacles and challenges, and how you plan to overcome them.
@@ -97,13 +94,14 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
 | July 3-10 | Build the functions into a package. Get a prototype package with a central wrapper with all solvers, that passes R CMD check.|
 | | Midterm evaluation|
-| July 17-23| Initiate comparison wrapper with class structure. Start with 3-4 solver options.|
-| July 24-August 3| Add all remaining solvers to the comparison wrapper, in a similar manner to the central wrapper. Document everything added in real time. Test after each addition. Compare performance of comparison wrapper to simple benchmarking.|
+| July 14-20| Initiate comparison wrapper with class structure. Start with 3-4 solver options.|
+| July 20-August 3| Add all remaining solvers to the comparison wrapper, in a similar manner to the central wrapper. Document everything added in real time. Test after each addition. Compare performance of comparison wrapper to simple benchmarking.|
 | August 4-13| Add examples and documentation. Debug and make sure the package passes R CMD check on all platforms. |
 | August 14-21| Buffer week for troubleshooting.|
+| August 21-28| Submission. Mentor evaluations.|
 || Final evaluation|
 
-Since I'll be attending classes in the last 3 weeks, from July 31, I plan to leave the minimum amount of work possible for the end, and leave a buffer for unexpected delays or obstacles in the end.
+Since I'll be attending classes in the last 4 weeks, from July 31, and might be able to commit relatively less time. I plan to compensate for this by getting a maximum of work on the comparison wrapper done before July 31, and leave a buffer for unexpected delays or obstacles in the end.
 
 Write examples 
 (consult GSOC schedule)
