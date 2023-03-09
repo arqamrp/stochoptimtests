@@ -8,9 +8,9 @@ URL of project idea page: [https://github.com/rstats-gsoc/gsoc2023/wiki/StochOpt
 
 ## Bio of Contributor 
 
-I am a sophomore undergraduate in Statistics and Data Science at the Indian Institute of Technology, Kanpur. I enjoy
+I am a sophomore undergraduate in Statistics and Data Science at the Indian Institute of Technology, Kanpur.
 My introduction to R took place through the course, Data Science Lab I, taught by Dr Dootika Vats, an ex R project GSOC alumna (2015) herself. In the course, I learned the fundamentals of R, including things like benchmarking, Rshiny, Rmarkdown and Rcpp. 
-I am also currently doing a course, Statistical Computing, which includes optimisation methods and am also somewhat familiar with the theoretical content of the project.
+I am also currently doing a course, Statistical Computing, which includes optimisation methods and am thus somewhat familiar with the theoretical content of the project.
 
 
 ## Contact Information 
@@ -25,7 +25,7 @@ Email(s):
 arqamrp@gmail.com
 arqamrp21@iitk.ac.in
 
-Other communications channels: Skype/Google+, etc. : 
+Other communications channels: Skype/Google+, etc. : https://instagram.com/arqambhaipatel
 
 
 ## Contributor affiliation
@@ -41,7 +41,7 @@ Contact to verify: Dr Dootika Vats, dootika@iitk.ac.in
 
 ## Schedule Conflicts:
 
-Classes at my college will resume classes from July 31.
+Classes at my college will resume from July 31.
 
 ## Mentors
 
@@ -50,7 +50,7 @@ Evaluating mentor name and email: John C Nash, profjcnash@gmail.com
 Co-mentor name(s) and email(s): HW Borchers, hwborchers@gmail.com, Paulo Cortez, pcortez@dsi.uminho.pt
 
 Have you been in touch with the mentors? When and how? 
-Yes, I have been in touch with the mentors since March 2, and we have corresponded consistently through email.
+I have been in touch with the mentors since March 2, and we have corresponded consistently through email.
 
 ## Coding Plan and Methods
 
@@ -60,8 +60,7 @@ The package aims to provide two main sorts of functionality:
 
 To start, we would need a comprehensive lists of the optimisers, their arguments, the control parameters that can be tweaked, the default configurations for these paramters, and the forms of the outputs.
 
-
-I have attempted to make such lists for GenSA and DEoptim to start with:
+I have attempted to make such lists for GenSA, DEoptim and psoptim to start with:
 
 ## GenSA {GenSA}
 
