@@ -77,15 +77,16 @@ The best R GSoC applications tend to be 10+ pages printed.  Planning is a key pa
 | Time | Task(s)|
 | --- | :---|
 | May 4-10 | Review the source code of the package [optimx](https://cran.r-project.org/web/packages/optimx/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
-| May 11-16 | Read about and practice object oriented programming in R (from the book Advanced Object-Oriented Programming in R). Learn about S3, S4, R6 classes and decide which approach would be best. |
-| May 17-28 | Select possibly 15-20 solvers to initially include from amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers. Document package dependencies. |
+| May 11-15 | Read about and practice object oriented programming in R (from the book Advanced Object-Oriented Programming in R). Learn about S3, S4, R6 classes and decide which approach would be best. |
+| May 16-22 | Select possibly 15-20 solvers to initially include from amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers. 
+|May 23-28 | Document package dependencies. Decide on nomenclature scheme for functions, solvers, controls etc. Write introductory documentation to the package. |
 | May 29-June 9 | Write and document (using text as well as diagrams) the fundamental class structure of the central and subwrappers. Develop a prototype that works with two or three methods with default options and trace set to off. Test it on multiple functions.|
 | June 10-18 | Add the rest of the solvers (two per day). Compare the performance of the central wrapper to a loop calling optimisers one by one.|
 | June 19-25 | Add custom control parameters and global options for each solver. Document everything added in real time. Test after each addition.|
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
 | July 3-10 | Build the functions into a package. Get a prototype package with a central wrapper with all solvers, that passes R CMD check.|
 | July 17-23| Initiate comparison wrapper with class structure, starting with 3-4 solvers.|
-| July 24-August 3| Add all remaining solvers to the comparison wrapper, in a similar manner to the central wrapper.|
+| July 24-August 3| Add all remaining solvers to the comparison wrapper, in a similar manner to the central wrapper. Document everything added in real time. Test after each addition. Compare performance of comparison wrapper to simple benchmarking.|
 | August 4-13| Add examples and documentation. Debug and make sure the package passes R CMD check on all platforms. |
 | August 14-21| Buffer week for troubleshooting.|
 
