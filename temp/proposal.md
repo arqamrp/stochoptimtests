@@ -293,7 +293,7 @@ If you have other time commitments that will interfere with GSoC, we highly reco
 
 **Documentation plan**
 
-I plan to write clear descriptions of the commits I make to the repository and add those to a text/spreadsheet based log file. I also plan to write a detailed weekly blog, starting from the community bonding period itself, describing the progress made, the development choices made (and what the other options were) etc.
+I plan to write clear descriptions of the commits I make to the repository and add those to a text/spreadsheet based log file. I also plan to write a detailed weekly blog, starting from the community bonding period itself, describing the progress made, the development choices made (and what the other options were) etc. I will use roxygen2 for creating documentation .Rd files for functions of the package while I also plan to include vignettes created using Rmakrdown that provide a comprehensive guide on the various optimisers available and how the functions can be used.
 
 I will also create a progress tracking spreadsheet with a list of the tasks accomplished daily (along with the corresponding log reference) and the tasks I plan to accomplish in the coming week. 
 
