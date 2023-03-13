@@ -264,7 +264,7 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 |May 23-28 | Document package dependencies. Decide on nomenclature scheme for functions, solvers, controls etc. Write introductory documentation to the package. |
 || Coding starts|
 | May 29-June 9 | Write and document (using text as well as diagrams) the fundamental class structure of the central and subwrappers. Develop a prototype that works with two or three methods with default options and trace set to off. Test it on multiple functions.|
-| June 10-18 | Add the rest of the solvers (two per day). Compare the performance of the central wrapper to a loop calling optimisers one by one.|
+| June 10-18 | Add the rest of the solvers (two per day). Compare by benchmarking the performance of the central wrapper to a loop calling optimisers one by one.|
 | June 19-25 | Add custom control parameters and global options for each solver. Document everything added in real time. Test after each addition.|
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
 | July 3-10 | Build the functions into a package. Get a prototype package with a central wrapper with all solvers, that passes R CMD check.|
@@ -291,11 +291,21 @@ If you have other time commitments that will interfere with GSoC, we highly reco
 
 ## Management of Coding Project
 
+**Documentation plan**
+
+I plan to write clear descriptions of the commits I make to the repository and add those to a text/spreadsheet based log file. I also plan to write a detailed weekly blog, starting from the community bonding period itself, describing the progress made, the development choices made (and what the other options were) etc.
+
+I will also create a progress tracking spreadsheet with a list of the tasks accomplished daily (along with the corresponding log reference) and the tasks I plan to accomplish in the coming week. 
+
+For testing the overall package state, I plan to run a weekly R CMD check and reinstall the package periodically in my R environment. For testing individual subwrappers, I will compare the subwrapper outputs to the original package function's output using seeds for reproducibility. I will use `rbenchmark` to measure the performance of the central wrapper compared to a simple loop calling the various optimisers. I will also profile each subwrapper using `profvis` to check for potential efficiency improvements.
+
+I plan to push commits at least every two days.
+
 How do you propose to ensure code is submitted / tested?
 
 How often do you plan to commit?  What changes in commit behavior would indicate a problem?
 
-I plan to push commits every two days.
+
 
 ## Test
 
