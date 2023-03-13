@@ -9,7 +9,7 @@ URL of project idea page: [https://github.com/rstats-gsoc/gsoc2023/wiki/StochOpt
 ## Bio of Contributor 
 
 I am a sophomore undergraduate in Statistics and Data Science at the Indian Institute of Technology, Kanpur.
-My introduction to R took place through the course, Data Science Lab I, taught by Dr Dootika Vats, an ex R project GSOC alumna (2015) herself. In the course, I learned the fundamentals of R, including things like benchmarking, Rshiny, Rmarkdown and Rcpp. 
+My introduction to R took place through the course, Data Science Lab I, taught by Dr Dootika Vats. In the course, I learned the fundamentals of R, including things like benchmarking, Rshiny, Rmarkdown and Rcpp. 
 I am also currently doing a course, Statistical Computing, which includes optimisation methods and am thus somewhat familiar with the theoretical content of the project.
 
 
