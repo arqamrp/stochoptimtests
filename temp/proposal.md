@@ -58,7 +58,7 @@ The package aims to provide two main sorts of functionality:
 - a way to call multiple optimisers using a single interface
 - a way to compare these optimisers in the given use-case
 
-To start, we would need a comprehensive lists of the optimisers, their arguments, the control parameters that can be tweaked, the default configurations for these paramters, and the forms of the outputs.
+To start, we would need a comprehensive lists of the optimisers, their arguments, the control parameters that can be tweaked, the default configurations for these parameters, and the forms of the outputs.
 
 I have attempted to make such lists for GenSA, DEoptim and psoptim to start with:
 
@@ -276,7 +276,7 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 | August 21-28| Submission. Mentor evaluations.|
 || Final evaluation|
 
-Since I'll be attending classes in the last 4 weeks, from July 31, and might be able to commit relatively less time. I plan to compensate for this by getting a maximum of work on the comparison wrapper done before July 31, and leave a buffer for unexpected delays or obstacles in the end.
+Since I'll be attending classes in the last 4 weeks, from July 31, I might be able to commit a bit less time relatively- I'll be able to manage ~30 hours a week. I plan to compensate for this by getting a maximum of work on the comparison wrapper done before July 31 by spending more time per week (40-45 hours), and leave a buffer for unexpected delays or obstacles in the end.
 
 Write examples 
 (consult GSOC schedule)
