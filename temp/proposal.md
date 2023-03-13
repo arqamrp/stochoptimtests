@@ -267,7 +267,7 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 | June 10-18 | Add the rest of the solvers (two per day). Compare by benchmarking the performance of the central wrapper to a loop calling optimisers one by one.|
 | June 19-25 | Add custom control parameters and global options for each solver. Document everything added in real time. Test after each addition.|
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
-| July 3-10 | Build the functions into a package. Get a prototype package with a central wrapper with all solvers, that passes R CMD check.|
+| July 3-10 | Build the functions into a package. Write the documentation for installation. Get a prototype package with a central wrapper with all solvers, that passes R CMD check.|
 | | Midterm evaluation|
 | July 14-20| Initiate comparison wrapper with class structure. Start with 3-4 solver options.|
 | July 20-August 3| Add all remaining solvers to the comparison wrapper, in a similar manner to the central wrapper. Document everything added in real time. Test after each addition. Compare performance of comparison wrapper to simple benchmarking.|
