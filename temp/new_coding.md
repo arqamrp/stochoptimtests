@@ -140,12 +140,13 @@ The comparison wrapper would make calls to the central wrapper for each method, 
 | lower, upper | bounds for optimisation|
 | minimize | Boolean indicating whether it is to be minimised (Default = TRUE)|
 
-### Arguments giving global control options:
+### Arguments giving solver-agnostic control options:
 | parameter | description |
 | -- | :-- |
 | maxf| maximum number of objective function calls|
 | maxtime| maximum time or which algorithm can run|
 | abstol | targeted optimum value (default - -Inf for minimize = TRUE); The method converges once the best fitness obtained is less than or equal to target.|
+| trace | whether progress should be printed at each step for each method |
 
 ### Passing methods to be used
 methods: vector of methods to be applied (using default controls)
@@ -154,7 +155,7 @@ OR
 
 control: list of custom, solver-specific control setting lists defined using control setting functions.
 
-### Controlling outputs
+### Arguments customising fields to output
 
 | argument | description |
 | -- | :-- |
@@ -165,7 +166,7 @@ control: list of custom, solver-specific control setting lists defined using con
 
 ### Outputs:
 
-A dataframe containing tabulated values for each method:
+A dataframe containing tabulated values of the selected fields for each method:
 value: optimum value found
 | Column | Description | 
 | -- | :-- |
