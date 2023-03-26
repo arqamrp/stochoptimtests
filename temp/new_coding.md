@@ -1,6 +1,6 @@
 ## Control setting functions:
 
-For every solver, we will define a controls setting function that takes in the control parameters as arguments and outputs a list containing the user defined values for inputed parameters and default values for the rest. These would ensure that the controls are actually conform to a valid set of controls for a solver. The common control options (like niter and trace) will also given consistent names in the arguments across solvers to alleviate confusion, and will be translated to the solver specific nomenclature in the function. This will also allow the user to easily explore the control parameters by using the control function's ? Documentation.
+For every solver, we will define a controls setting function that takes in the control parameters as arguments and outputs a list containing the user defined values for inputed parameters and default values for the rest. This ensures that the controls actually conform to a valid set of controls for a solver. The common control options (like itermax and trace) will also given consistent names in the arguments across solvers to alleviate confusion, and will be translated to the solver specific nomenclature in the function. This will also allow the user to easily explore the control parameters by using the control function's ? Documentation.  
 
 ```
 # using custom controls
@@ -38,7 +38,7 @@ $control$bs
 [1] FALSE
 
 $control$trace
-[1] TRUE
+[1] FALSE
 
 $control$initialpop
 NULL
@@ -90,7 +90,7 @@ soptim(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), method = "DEoptim")
 soptim(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), control = DE1)
 ```
 
-The central wrapper `soptim` would in turn make function calls to the specific subwrappers , e.g. `soptim.DEoptim`, along with the optimisation problem parameters and the control parameters if specified.
+The central wrapper `soptim` would in turn make function calls to the specific optimiser, e.g. `DEoptim`, along with the optimisation problem parameters and the control parameters. The control setting functions would allow us to bypass the need for wrapping functions for each solver, since we can ensure the conformity of control options. So, we can directly structure the central wrapper as a logic flow of solver function calls with the control argument set to the control list (e.g. `DE1`).
 
 ### Arguments defining optimisation problem:
 
@@ -100,13 +100,15 @@ The central wrapper `soptim` would in turn make function calls to the specific s
 |lower, upper| bounds for optimisation |
 |minimize| Boolean indicating whether it is to be minimised (Default = TRUE)|
 
-### Arguments giving global control options:
+### Arguments giving solver-agnostic control options:
 | parameter | description |
 | -- | :-- |
 |maxf| maximum number of objective function calls|
 |maxtime| maximum time or which algorithm can run|
 |abstol | targeted optimum value (default - -Inf for minimize = TRUE); The method converges once the best fitness obtained is less than or equal to target.|
 | trace | Boolean indicating whether progress should be printed at each iteration |
+
+The control lists containing solver specific control options (e.g. DE1) will be modified in the function scope with the values of these at the time of the function call.
 
 ### Passing methods to be used
 method = "DEoptim": using default controls
@@ -125,13 +127,6 @@ A list containing the following should be output:
 | fevals | no. of function calls to objective function |
 | niter | number of iterations of algorithm |
 | convergence | exit code indicating reason for termination (e.g. 0: target reached, 1: maxf reached, 2: maxiter reached)|
-
-## Subwrappers
-### soptim.DEoptim
-
-This would 
-
-
 
 ## Comparison wrapper soptimx:
 
