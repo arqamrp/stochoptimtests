@@ -10,14 +10,91 @@ pso1 <- control.psoptiim(maxiter = 2000)
 pso2 <- control.psoptim(type = "SPSO2011")
 ```
 
+The contents of DE1 will look like (with a few changes for consistent nomenclature):
+```
+$method
+[1] "DEoptim"
+
+$control
+$control$VTR
+[1] -Inf
+
+$control$strategy
+[1] 2
+
+$control$NP
+[1] NA
+
+$control$itermax
+[1] 200
+
+$control$CR
+[1] 0.5
+
+$control$F
+[1] 0.8
+
+$control$bs
+[1] FALSE
+
+$control$trace
+[1] TRUE
+
+$control$initialpop
+NULL
+
+$control$storepopfrom
+[1] 201
+
+$control$storepopfreq
+[1] 1
+
+$control$p
+[1] 0.2
+
+$control$c
+[1] 0
+
+$control$reltol
+[1] 1.490116e-08
+
+$control$steptol
+[1] 200
+
+$control$parallelType
+[1] "none"
+
+$control$cluster
+NULL
+
+$control$packages
+NULL
+
+$control$parVar
+NULL
+
+$control$foreachArgs
+list()
+
+$control$parallelArgs
+NULL
+
+```
+
+
 ## Main wrapper soptim:
+
+```
+soptim(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), method = "DEoptim")
+soptim(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), control = DE1)
+```
 
 ### Arguments defining optimisation problem:
 
 | argument | description |
 | -- | :-- |
-|fn | objective function to be optimised|
-|lower, upper| bounds for optimisation|
+|fn | objective function to be optimised |
+|lower, upper| bounds for optimisation |
 |minimize| Boolean indicating whether it is to be minimised (Default = TRUE)|
 
 ### Arguments giving global control options:
@@ -31,10 +108,6 @@ pso2 <- control.psoptim(type = "SPSO2011")
 method = "DEoptim": using default controls
 OR
 control = DE1: using custom controls
-
-```
-soptim(fn = rastrigin, lower)
-```
 
 ## Comparison wrapper soptimx:
 
@@ -77,16 +150,8 @@ soptimx(methods = c("DEoptim", "psoptim"))
 ```
 
 ```
-# using custom controls
-DE1 <- control.DEoptim(NP = 10, strategy =1)
-DE2 <- control.DEoptim(NP = 12)
-pso1 <- control.psoptiim(maxiter = 2000)
-pso2 <- control.psoptim(type = "SPSO2011")
-
 soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), controls = list(DE1, DE2, pso1, pso2 ))
 ```
-
-
 
 
 
