@@ -103,11 +103,24 @@ soptim(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), control = DE1)
 |maxf| maximum number of objective function calls|
 |maxtime| maximum time or which algorithm can run|
 |abstol | targeted optimum value (default - -Inf for minimize = TRUE); The method converges once the best fitness obtained is less than or equal to target.|
+| trace | Boolean indicating whether progress should be printed at each iteration |
 
 ### Passing methods to be used
 method = "DEoptim": using default controls
 OR
 control = DE1: using custom controls
+
+### Outputs
+
+A list containing the following should be output:
+| Element | Description | 
+| -- | :-- |
+| value | objective function value |
+| par | parameters |
+| fevals | no. of function calls to objective function |
+| niter | number of iterations of algorithm |
+| convergence | exit code indicating reason for termination (e.g. 0: target reached, 1: maxf reached, 2: maxiter reached)|
+
 
 ## Comparison wrapper soptimx:
 
@@ -131,15 +144,18 @@ methods: vector of methods to be applied (using default controls)
 OR
 control: list of custom, solver-specific control setting lists defined using control setting functions.
 
-Outputs:
+### Outputs:
 
-A table containing:
+A dataframe containing tabulated values for each method:
 value: optimum value found
-par: parameters
-time: time taken 
-fevals: no. of function calls to objective function
-niter: number of iterations of algorithm
-co : exit code indicating reason for termination (e.g. 0: target reached, 1: maxf reached, 2: maxiter reached)
+| Column | Description | 
+| -- | :-- |
+| value | objective function value |
+| par | parameters |
+| time | time taken |
+| fevals | no. of function calls to objective function |
+| niter | number of iterations of algorithm |
+| convergence | exit code indicating reason for termination (e.g. 0: target reached, 1: maxf reached, 2: maxiter reached)|
 
 An analogous function soptimx.constr() can be constructed for constrained optimisation if time permits.
 
@@ -159,7 +175,7 @@ Help functions:
 
 soptim.available()
 
-Lists all available methods
+Lists all available methods.
 
 
 
