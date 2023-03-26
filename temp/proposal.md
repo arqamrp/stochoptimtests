@@ -264,11 +264,11 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 | --- | :---|
 |  | Community bonding period|
 | May 4-10 | Review the source code of the package [optimx](https://cran.r-project.org/web/packages/optimx/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
-| May 11-15 | Read about and practice object oriented programming in R (from the book Advanced Object-Oriented Programming in R). Learn about S3, S4, R6 classes and decide which approach would be best. |
+| May 11-15 |  |
 | May 16-22 | Select possibly 15-20 solvers to initially include from amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers. 
 |May 23-28 | Document package dependencies. Decide on nomenclature scheme for functions, solvers, controls etc. Write introductory documentation to the package. |
 || Coding starts|
-| May 29-June 9 | Write and document (using text as well as diagrams) the fundamental class structure of the central and subwrappers. Develop a prototype that works with two or three methods with default options and trace set to off. Test it on multiple functions.|
+| May 29-June 9 | Write and document (using text as well as diagrams) the fundamental structure of the central and subwrappers. Develop a prototype that works with two or three methods with default options and trace set to off. Test it on multiple functions.|
 | June 10-18 | Add the rest of the solvers (two per day). Compare by benchmarking the performance of the central wrapper to a loop calling optimisers one by one.|
 | June 19-25 | Add custom control parameters and global options for each solver. Document everything added in real time. Test after each addition.|
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
