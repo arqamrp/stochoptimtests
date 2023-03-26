@@ -143,7 +143,9 @@ A list containing the following should be output:
 
 ### Passing methods to be used
 methods: vector of methods to be applied (using default controls)
+
 OR
+
 control: list of custom, solver-specific control setting lists defined using control setting functions.
 
 ### Outputs:
