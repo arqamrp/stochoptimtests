@@ -23,7 +23,7 @@ $control$strategy
 [1] 2
 
 $control$NP
-[1] NA
+[1] 10
 
 $control$itermax
 [1] 200
