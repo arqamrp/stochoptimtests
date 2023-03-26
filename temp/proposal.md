@@ -235,6 +235,11 @@ The subwrappers, in turn, will:
 Then, we would need a comparison wrapper which would make calls to all the various optimisers through the centraal wrapper, collect relevant information ie the optimum parameters, optimum value, function calls, time taken, etc. and display those in an easy to read, tabulated form.
 
 
+```
+
+```
+
+
 Describe in detail your plan for completing the work.  What functions will be written, how and when will you do design, how will you verify the results of your coding?  The sub-section headings below are examples only.  Each project is different, please make your application appropriate to the work you propose.  
 
 Describe perceived obstacles and challenges, and how you plan to overcome them.
