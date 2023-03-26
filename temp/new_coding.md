@@ -172,7 +172,7 @@ An analogous function soptimx.constr() can be constructed for constrained optimi
 
 ```
 # default controls
-soptimx(methods = c("DEoptim", "psoptim"))
+soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), methods = c("DEoptim", "psoptim"))
 ```
 
 ```
