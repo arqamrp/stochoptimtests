@@ -170,6 +170,7 @@ soptimx(methods = c("DEoptim", "psoptim"))
 ```
 
 ```
+# custom controls
 soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), controls = list(DE1, DE2, pso1, pso2 ))
 ```
 
