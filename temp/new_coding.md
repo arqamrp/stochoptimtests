@@ -154,6 +154,15 @@ OR
 
 control: list of custom, solver-specific control setting lists defined using control setting functions.
 
+### Controlling outputs
+
+| argument | description |
+| -- | :-- |
+| time | Boolean indicating whether the time taken should be output |
+| fevals | Boolean indicating whether the no. of function calls taken should be output |
+| niter | Boolean indicating whether the number of iterations of algorithm should be output|
+| convergence | whether exit code should be output |
+
 ### Outputs:
 
 A dataframe containing tabulated values for each method:
@@ -167,7 +176,19 @@ value: optimum value found
 | niter | number of iterations of algorithm |
 | convergence | exit code indicating reason for termination (e.g. 0: target reached, 1: maxf reached, 2: maxiter reached)|
 
+```
+##                        p1            p2        value  time
+## default      2.611627e-10  1.622116e-09 0.000000e+00 1.834
+## maxit = 100  1.156110e-05 -2.148004e-07 2.652605e-08 0.181
+## maxit = 500 -2.022985e-09 -1.094271e-10 0.000000e+00 0.903
+## s = 3       -1.031261e-09  9.949586e-01 9.949591e-01 0.529
+## s = 6        8.316656e-10  4.021507e-10 0.000000e+00 0.961
+## SPSO2011     3.185646e-09 -9.572976e-11 0.000000e+00 7.426
+```
+
+
 An analogous function soptimx.constr() can be constructed for constrained optimisation if time permits.
+
 
 
 ```
