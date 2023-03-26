@@ -7,14 +7,14 @@ Comparison wrapper soptimx:
 Arguments defining optimisation problem:
 
 | argument | description |
-| -- | !-- |
+| -- | :-- |
 |fn | objective function to be optimised|
 |lower, upper| bounds for optimisation|
 |minimize| Boolean indicating whether it is to be minimised (Default = TRUE)|
 
 Global control options:
 | parameter | description |
-| -- | !-- |
+| -- | :-- |
 |maxf| maximum number of objective function calls|
 |maxtime| maximum time or which algorithm can run|
 |abstol | targeted optimum value (default - -Inf for minimize = TRUE); The method converges once the best fitness obtained is less than or equal to target.|
