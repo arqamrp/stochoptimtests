@@ -107,7 +107,9 @@ soptim(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), control = DE1)
 
 ### Passing methods to be used
 method = "DEoptim": using default controls
+
 OR
+
 control = DE1: using custom controls
 
 ### Outputs
@@ -176,6 +178,7 @@ Help functions:
 soptim.available()
 
 Lists all available methods.
+
 
 
 
