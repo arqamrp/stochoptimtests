@@ -10,7 +10,7 @@ URL of project idea page: [https://github.com/rstats-gsoc/gsoc2023/wiki/StochOpt
 
 I am a sophomore undergraduate in Statistics and Data Science at the Indian Institute of Technology, Kanpur.
 My introduction to R took place through the course, Data Science Lab I, taught by Dr Dootika Vats. In the course, I learned the fundamentals of R, including things like benchmarking, Rshiny, Rmarkdown and Rcpp. 
-I am also currently doing a course, Statistical Computing, which includes optimisation methods and am thus somewhat familiar with the theoretical content of the project.
+I am also currently doing a course, Statistical Computing, which includes optimisation methods and am thus familiar with the theoretical content of the project.
 
 
 ## Contact Information 
@@ -43,6 +43,7 @@ Contact to verify: Dr Dootika Vats, dootika@iitk.ac.in
 
 Classes at my college will resume from July 31.
 
+
 ## Mentors
 
 Evaluating mentor name and email: John C Nash, profjcnash@gmail.com
@@ -54,13 +55,15 @@ I have been in touch with the mentors since March 2, and we have corresponded co
 
 ## Coding Plan and Methods
 
-The package aims to provide two main sorts of functionality:
+The package aims to provide two main kinds of functionality:
 - a way to call multiple optimisers using a single interface
 - a way to compare these optimisers in the given use-case
 
-To start, we would need a comprehensive lists of the optimisers, their arguments, the control parameters that can be tweaked, the default configurations for these parameters, and the forms of the outputs.
+To start, we would need a comprehensive lists of the optimisers, their arguments (mandatory and optional), the control parameters that can be tweaked, the default configurations for these parameters, and the forms of the outputs.
 
-I have attempted to make such lists for GenSA, DEoptim and psoptim to start with:
+***
+
+I have attempted to make such lists for the solvers GenSA, DEoptim and psoptim to start with:
 
 ## GenSA {GenSA}
 
@@ -214,25 +217,11 @@ Returned as a list.
 | stats | Numeric matrix | A list of statistics collected at every reporting step |
 
 
+***
+
 ## Wrapper structure
 
-In the optimx package, the optimr() function is structured as a self contained wrapper, which makes for a single function running for >1000 LOC and having multiple points of failure, which would make debugging tougher.
-We can instead choose to have one central wrapper that takes the user command and in turn sends it to optimiser specific subwrappers.
 
-The central wrapper will:
-- Act as an interface between the user and the various subwrappers by carrying the problem and data to the desired subwrapper.
-- Set default configurations for the selected optimiser, in a way that the configurations across optimisers are roughly equivalent and suitable for the given problem.
-- Make standardised calls to the subwrapper.
-- Collate and return the results from the subwrapper in a standard format.
-
-The subwrappers, in turn, will:
-- Receive the standardised call with the problem, data and configurations
-- Customise the standardised call to the specific optimiser's requirements
-- Run the optimiser
-- Convert the results into a standard form and return them
-
-
-Then, we would need a comparison wrapper which would make calls to all the various optimisers through the centraal wrapper, collect relevant information ie the optimum parameters, optimum value, function calls, time taken, etc. and display those in an easy to read, tabulated form.
 
 
 ```
@@ -251,7 +240,7 @@ The best R GSoC applications tend to be 10+ pages printed.  Planning is a key pa
 
 **Monthly overview of timeline**
 
-May: Review the precursor codebase. Decide on the structure by iterating through some basic prototypes and approaches.
+May: Review the precursor codebase. Finalise the structure by iterating through some basic prototypes and approaches.
 
 June: Build the central wrapper and various subwrappers
 
@@ -263,12 +252,11 @@ August: Finish the comparison wrapper, make the whole package pass R CMD check.
 | Duration | Task(s)|
 | --- | :---|
 |  | Community bonding period|
-| May 4-10 | Review the source code of the package [optimx](https://cran.r-project.org/web/packages/optimx/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
-| May 11-15 |  |
-| May 16-22 | Select possibly 15-20 solvers to initially include from amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers. 
-|May 23-28 | Document package dependencies. Decide on nomenclature scheme for functions, solvers, controls etc. Write introductory documentation to the package. |
+| May 4-10 | Review the source code of the packages [optimx](https://cran.r-project.org/web/packages/optimx/index.html), [ROI](https://cran.r-project.org/web/packages/ROI/index.html) and [last year's project progress](https://github.com/SudoWodo/StochOptim). |
+| May 11-20 | Select possibly 15-20 solvers to initially include from amongst those listed under the "Global and Stochastic Optimization" heading in the [CRAN Task View: Optimization and Mathematical Programming](https://cran.r-project.org/web/views/Optimization.html). Document (in a tabulated form) the arguments, control parameters and outputs of the selected solvers. 
+|May 21-28 | Document package dependencies. Decide on nomenclature scheme for functions, solvers, controls etc. Write introductory documentation to the package. |
 || Coding starts|
-| May 29-June 9 | Write and document (using text as well as diagrams) the fundamental structure of the central and subwrappers. Develop a prototype that works with two or three methods with default options and trace set to off. Test it on multiple functions.|
+| May 29-June 9 | Write and document (using text as well as diagrams) the fundamental structure of the wrapper. Develop a prototype that works with two or three methods with default options and trace set to off. Test it on multiple functions.|
 | June 10-18 | Add the rest of the solvers (two per day). Compare by benchmarking the performance of the central wrapper to a loop calling optimisers one by one.|
 | June 19-25 | Add custom control parameters and global options for each solver. Document everything added in real time. Test after each addition.|
 | June 26-July 3 | Add trace control features for each solver. Test after each addition. Add documentation vignettes and examples for each solver. Compare the performance of the wrapper to a plain loop again.|
@@ -316,7 +304,14 @@ How often do you plan to commit?  What changes in commit behavior would indicate
 
 For the qualification test, I solved five tasks:
 ### [Rastrigin function](https://github.com/arqamrp/stochoptimtests/blob/main/tests/rastrigin.R):
-I implemented the Rastrigin function, a common test function for optimisation, for n-dimensional vectors, using the definition on its Wikipedia page. I then plotted it in three dimensions (for 2D vectors, with the z axis representing fuunction value). I also guessed its global minimum and provided the rationale behind my guess.
+I implemented the Rastrigin function, a common test function for optimisation, for n-dimensional vectors, using the definition on its Wikipedia page. I then plotted it in three dimensions (for 2D vectors, with the z axis representing fuunction value). I also guessed its global minimum and provided the rationale behind my guess: The figure curves downward toward the centre, suggesting that the minimum might be (0,0). We can confirm this by observing that for all i, A \*1-cos(2pi x_i)) + x_i^2 is non negative and f(x) is the sum of these. f((0,0)) = 0 is the least non negative quantity possible and thus the origin is a global minimum.
+.
+
+```
+rastrigin <- function(X, A = 10, n= 2){
+  n*A + sum(X^2 - A*cos(2*pi*X))
+}
+```
 
 ![Rastrigin plot](https://github.com/arqamrp/stochoptimtests/blob/main/tests/rastrigin.png)
 
@@ -325,6 +320,32 @@ I implemented the Rastrigin function, a common test function for optimisation, f
 I used the default Nelder-Mead local optimiser on five randomly initialised starting points (setting a seed for reproducibility). Then, fixing the starting point, I used the five different algorithm options within optim() (using separate calls for each method) to compare them on the basis of the minima found and time taken (measured using rbenchmark). 
 After this, I used the ucminf function to implement another local optimiser (not available in optim) on those five points, and then the optimx function to run and compare multiple methods with the same initial point using one function call.
 
+```
+n <- 5
+set.seed(1)
+init <- matrix(runif(n = 2*n, -5.12, 5.12), nrow = n, ncol = 2)
+vals <- numeric(n)
+opt <- matrix(0, n, 3)
+for(i in 1:n){
+  vals[i] <- rastrigin(init[i,])
+  optimum <- optim(par = init[i,], fn = rastrigin)
+  opt[i, 1] <- optimum$par[1]
+  opt[i, 2] <- optimum$par[2]
+  opt[i, 3] <- optimum$value
+}
+mat <- cbind(init, vals, opt)
+df <- as.data.frame(mat)
+colnames(df) <- c("p1_init", "p2_init", "value_init", "p1_optim", "p2_optim", "value_optim")
+df
+```
+
+|   |  p1_init  | p2_init | value_init  | p1_optim | p2_optim | value_optim |
+| - | -------   | -----   | ----------  | -------- | -------- | ----------- | 
+| 1 | -2.4011913 | 4.079510 |  41.76422 | -1.9899000 | 3.979759 |   19.89908 |
+| 2 | -1.3094513 | 4.553475 |  55.53880 | -0.9949912 | 4.974703 |   25.86868 |
+| 3 | 0.7460184 | 1.646569 | 29.56874 | 0.9949811 | 1.989927   |  4.97479 |
+| 4 | 4.1800478 | 1.322128 | 39.34412 | 3.9797852 | 1.989949  |  19.89908 |
+| 5 | -3.0547770 | -4.487309 | 50.02228 | -2.9848159 | -3.979761 |   24.87385 |
 
 
 ### [Stochastic optimisation](https://github.com/arqamrp/stochoptimtests/blob/main/tests/stochastic_optimisation.R) 
