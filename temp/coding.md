@@ -1,5 +1,25 @@
 ## Coding Plan and Methods
 
+
+In the optimx package, the optimr() function is structured as a self contained wrapper, which makes for a single function running for >1000 LOC and having multiple points of failure, which would make debugging tougher.
+We can instead choose to have one central wrapper that takes the user command and in turn sends it to optimiser specific subwrappers.
+
+The central wrapper will:
+- Act as an interface between the user and the various subwrappers by carrying the problem and data to the desired subwrapper.
+- Set default configurations for the selected optimiser, in a way that the configurations across optimisers are roughly equivalent and suitable for the given problem.
+- Make standardised calls to the subwrapper.
+- Collate and return the results from the subwrapper in a standard format.
+
+The subwrappers, in turn, will:
+- Receive the standardised call with the problem, data and configurations
+- Customise the standardised call to the specific optimiser's requirements
+- Run the optimiser
+- Convert the results into a standard form and return them
+
+
+Then, we would need a comparison wrapper which would make calls to all the various optimisers through the centraal wrapper, collect relevant information ie the optimum parameters, optimum value, function calls, time taken, etc. and display those in an easy to read, tabulated form.
+
+
 The package aims to provide two main sorts of functionality:
 - a way to call multiple optimisers using a single interface
 - a way to compare these optimisers in the given use-case
