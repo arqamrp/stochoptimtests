@@ -177,27 +177,23 @@ control = list(DE1, DE2): list of custom, solver-specific control setting lists 
 
 ### Outputs:
 
-A dataframe containing tabulated values of the selected fields for each method:
+A list containing the following:
+
+1. A dataframe containing tabulated values of the selected fields for each method:
 value: optimum value found
 | Column | Description | 
 | -- | :-- |
 | value | objective function value |
-| par | parameters |
 | time | time taken |
 | fevals | no. of function calls to objective function |
 | niter | number of iterations of algorithm |
 | convergence | exit code indicating reason for termination (e.g. 0: target reached, 1: maxf reached, 2: maxiter reached)|
 
-```
-##                        p1            p2        value  time
-## default      2.611627e-10  1.622116e-09 0.000000e+00 1.834
-## maxit = 100  1.156110e-05 -2.148004e-07 2.652605e-08 0.181
-## maxit = 500 -2.022985e-09 -1.094271e-10 0.000000e+00 0.903
-## s = 3       -1.031261e-09  9.949586e-01 9.949591e-01 0.529
-## s = 6        8.316656e-10  4.021507e-10 0.000000e+00 0.961
-## SPSO2011     3.185646e-09 -9.572976e-11 0.000000e+00 7.426
-```
+2. A list of the `par` vectors of optimum parameters found by the various solvers, with the element names corresponding to the solver name or control variable name
 
+
+```
+```
 
 An analogous function soptimx.constr() can be constructed for constrained optimisation if time permits.
 
@@ -206,9 +202,13 @@ An analogous function soptimx.constr() can be constructed for constrained optimi
 ```
 # default controls
 soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), methods = c("DEoptim", "psoptim"))
-```
 
-```
+# all methods at once, using default controls
+soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), methods = "all")
+
+# all except specified ones, under default controls
+soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), exclude = c("DEoptim", "psoptim"))
+
 # custom controls
 soptimx(fn = rastrigin, lower = c(-5, -5), upper = c(5, 5), controls = list(DE1, DE2, pso1, pso2 ))
 ```
