@@ -117,6 +117,8 @@ OR
 
 control = DE1: using custom controls
 
+
+
 ### Outputs
 
 A list containing the following should be output:
@@ -149,11 +151,20 @@ The comparison wrapper would make calls to the central wrapper for each method, 
 | trace | whether progress should be printed at each step for each method |
 
 ### Passing methods to be used
-methods: vector of methods to be applied (using default controls)
+
+method = c("DEoptim", "psoptim"): vector of methods to be applied (using default controls)
 
 OR
 
-control: list of custom, solver-specific control setting lists defined using control setting functions.
+method = "all" : all available methods should be applied 
+
+OR
+
+exclude = c("DEoptim", "psoptim"): all methods except these should be applied
+
+OR
+
+control = list(DE1, DE2): list of custom, solver-specific control setting lists defined using control setting functions.
 
 ### Arguments customising fields to output
 
