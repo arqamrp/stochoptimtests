@@ -170,6 +170,7 @@ control = list(DE1, DE2): list of custom, solver-specific control setting lists 
 
 | argument | description |
 | -- | :-- |
+| par | Boolean, whether the `par` vectors are to be output separately, default FALSE |
 | time | Boolean indicating whether the time taken should be output |
 | fevals | Boolean indicating whether the no. of function calls taken should be output |
 | niter | Boolean indicating whether the number of iterations of algorithm should be output|
@@ -177,7 +178,9 @@ control = list(DE1, DE2): list of custom, solver-specific control setting lists 
 
 ### Outputs:
 
-A list containing the following:
+If par = FALSE: Only the dataframe as given below.
+
+If par = TRUE: A list containing the following:
 
 1. A dataframe containing tabulated values of the selected fields for each method:
 value: optimum value found
